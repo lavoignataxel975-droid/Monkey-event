@@ -1,0 +1,47 @@
+/* Monkey Events V2 : beige, noir doux, et une gamme de vert sauge assumée (contrastes WCAG AA vérifiés) */
+:root {
+  /* Beige (base lumineuse) */
+  --beige: #eee8dc;
+  --beige-2: #e6dfd1;
+  /* Noir doux, légèrement vert pour s'accorder à la sauge */
+  --ink: #1b1e1a;
+  --ink-mute: #55594f;           /* sur beige : 5,9:1 */
+  --line: rgb(27 30 26 / 0.14);
+
+  /* Vert sauge : du plus clair au plus profond */
+  --sage-50: #e3e8da;            /* fond de section clair */
+  --sage-100: #d3dac8;
+  --sage-300: #aab79c;           /* sur sauge 800 : 5,9:1 */
+  --sage: #8c9b7e;               /* teinte de référence */
+  --sage-600: #56664b;           /* texte d'accent sur beige : 5,1:1 */
+  --sage-700: #46543e;
+  --sage-800: #2c3828;           /* fonds profonds (bloc Contact, menu) */
+  --sage-900: #212a1e;           /* pied de page */
+
+  /* Clair sur fonds sombres et images */
+  --cream: #f4efe5;
+  --cream-mute: rgb(244 239 229 / 0.74);
+
+  --error: #8f3a2b;              /* sur beige : 6,1:1 */
+
+  /* Geist (licence OFL) pour tout le site : titres en graisse fine et approche resserrée, textes en 400 */
+  --font-display: 'Geist Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-text: 'Geist Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+
+  --track-wide: 0.32em;
+  --gutter: clamp(16px, 3.2vw, 48px);
+  --header-h: 64px;
+  --radius: 0;                   /* angles droits partout */
+
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-fast: 0.25s;
+  --t-slow: 1.1s;
+}
+@media (min-width: 1024px) {
+  :root { --header-h: 72px; }
+}

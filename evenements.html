@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <!-- @include head -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title data-i18n="events.meta.title">Événements · Monkey Events</title>
+  <meta name="description" content="Les destinations où Monkey Events a déjà organisé des événements." data-i18n-attr="content:events.meta.desc">
+  <meta name="theme-color" content="#ede6da">
+  <link rel="icon" href="data:,">
+</head>
+<body data-page="evenements">
+  <!-- @include header -->
+
+  <main id="contenu" class="page" tabindex="-1">
+    <section class="events wrap">
+      <header class="events__intro">
+        <h1 class="page__t" data-i18n="events.h1">Événements</h1>
+        <div class="events__text">
+          <p class="events__lede" data-i18n="events.lede">Chacune des destinations présentées ici est un lieu où nous avons déjà eu le plaisir d’organiser un événement.</p>
+          <div class="events__more">
+            <p data-i18n="events.more">Cette sélection n’est pas exhaustive&nbsp;: selon vos envies, vos besoins et la nature de votre projet, nous pouvons imaginer votre événement sous d’autres horizons.</p>
+            <!-- numéro : src/site.config.js → contact.phone -->
+            <p><span data-i18n="events.call">Pour obtenir des renseignements précis sur une destination ou nous parler de votre projet, appelez-nous directement au </span><span class="phone is-empty" data-agency-phone data-i18n="phone.missing">numéro à compléter</span><span data-i18n="events.call.end">.</span></p>
+          </div>
+        </div>
+      </header>
+
+      <!-- Destinations : src/site.config.js → destinations (src/js/destinations.js) -->
+      <section class="events__dest" aria-labelledby="dest-t">
+        <h2 class="sr-only" id="dest-t" data-i18n="events.dest">Destinations</h2>
+        <ul class="dest-grid" data-destinations></ul>
+      </section>
+    </section>
+  </main>
+
+  <!-- @include footer -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

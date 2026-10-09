@@ -1,0 +1,17 @@
+{
+  "name": "monkey-events-v2",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 5240 --strictPort",
+    "build": "vite build",
+    "preview": "vite preview --port 5241 --strictPort"
+  },
+  "devDependencies": {
+    "vite": "^8.3.4"
+  },
+  "dependencies": {
+    "@fontsource-variable/geist": "^5.3.0",
+    "@phosphor-icons/core": "^2.1.1"
+  }
+}

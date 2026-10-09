@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <!-- @include head -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title data-i18n="contact.meta.title">Contact · Monkey Events</title>
+  <meta name="description" content="Contacter Monkey Events." data-i18n-attr="content:contact.meta.desc">
+  <meta name="theme-color" content="#ede6da">
+  <link rel="icon" href="data:,">
+</head>
+<body data-page="contact">
+  <!-- @include header -->
+
+  <main id="contenu" class="page" tabindex="-1">
+    <section class="contact wrap">
+      <header class="contact__head">
+        <h1 class="page__t" data-i18n="contact.h1">Contact</h1>
+      </header>
+
+      <div class="contact__grid">
+        <!-- Coordonnées : src/site.config.js → contact -->
+        <section class="contact__info" aria-labelledby="coords-t">
+          <h2 class="contact__h" id="coords-t" data-i18n="contact.details">Coordonnées</h2>
+          <ul class="coords">
+            <li class="coord" data-coord="email">
+              <span class="coord__ico">{{icon:envelope-simple}}</span>
+              <span class="coord__label" data-i18n="contact.email">E-mail</span>
+              <span class="coord__value is-empty" data-coord-value data-i18n="contact.missing">À compléter</span>
+            </li>
+            <li class="coord" data-coord="phone">
+              <span class="coord__ico">{{icon:phone}}</span>
+              <span class="coord__label" data-i18n="contact.phone">Téléphone</span>
+              <span class="coord__value is-empty" data-coord-value data-i18n="contact.missing">À compléter</span>
+            </li>
+            <li class="coord" data-coord="address" hidden>
+              <span class="coord__ico">{{icon:map-pin}}</span>
+              <span class="coord__label" data-i18n="contact.address">Adresse</span>
+              <span class="coord__value" data-coord-value></span>
+            </li>
+            <li class="coord" data-coord="socials" hidden>
+              <span class="coord__ico">{{icon:globe-simple}}</span>
+              <span class="coord__label" data-i18n="contact.socials">Réseaux sociaux</span>
+              <span class="coord__value" data-coord-value></span>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Formulaire : envoi vers src/site.config.js → contact.formEndpoint (src/js/contact.js) -->
+        <section class="contact__form" aria-labelledby="form-t">
+          <h2 class="contact__h" id="form-t" data-i18n="form.title">Écrivez-nous</h2>
+          <form class="form" data-contact-form novalidate>
+            <div class="field">
+              <label for="f-nom" data-i18n="form.name">Nom et prénom</label>
+              <input id="f-nom" name="nom" type="text" autocomplete="name" required minlength="2" maxlength="120" aria-describedby="f-nom-err">
+              <p class="field__err" id="f-nom-err" hidden></p>
+            </div>
+            <div class="form__row">
+              <div class="field">
+                <label for="f-email" data-i18n="form.email">Adresse e-mail</label>
+                <input id="f-email" name="email" type="email" autocomplete="email" required maxlength="160" aria-describedby="f-email-err">
+                <p class="field__err" id="f-email-err" hidden></p>
+              </div>
+              <div class="field">
+                <label for="f-tel"><span data-i18n="form.phone">Téléphone</span> <span class="field__opt" data-i18n="form.optional">(facultatif)</span></label>
+                <input id="f-tel" name="telephone" type="tel" autocomplete="tel" inputmode="tel" maxlength="30" aria-describedby="f-tel-err">
+                <p class="field__err" id="f-tel-err" hidden></p>
+              </div>
+            </div>
+            <div class="field">
+              <label for="f-msg" data-i18n="form.message">Message</label>
+              <textarea id="f-msg" name="message" rows="6" required minlength="10" maxlength="5000" aria-describedby="f-msg-err"></textarea>
+              <p class="field__err" id="f-msg-err" hidden></p>
+            </div>
+            <!-- piège à robots : invisible, doit rester vide -->
+            <div class="form__hp" aria-hidden="true">
+              <label for="f-site" data-i18n="form.honeypot">Ne pas remplir</label>
+              <input id="f-site" name="site" type="text" tabindex="-1" autocomplete="off">
+            </div>
+            <div class="form__foot">
+              <button class="btn" type="submit" data-submit>
+                <span data-submit-label data-i18n="form.send">Envoyer mon message</span>
+                <span class="btn__arrow" aria-hidden="true">{{icon:arrow-right}}</span>
+              </button>
+            </div>
+            <div class="form__status" role="status" aria-live="polite" data-form-status hidden></div>
+          </form>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <!-- @include footer -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

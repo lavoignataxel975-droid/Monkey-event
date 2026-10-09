@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <!-- @include head -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title data-i18n="home.meta.title">Monkey Events · Événements et séjours d’exception</title>
+  <meta name="description" content="Monkey Events organise des événements et des séjours d’exception." data-i18n-attr="content:home.meta.desc">
+  <meta name="theme-color" content="#1c1a17">
+  <link rel="icon" href="data:,">
+  <!-- vidéo du hero : préchargement de l'image d'aperçu (src/site.config.js → hero.poster) -->
+  <link rel="preload" as="image" href="/media/hero/monkey-events-hero-poster.jpg" fetchpriority="high">
+</head>
+<body data-page="accueil" class="is-home">
+  <!-- @include header -->
+
+  <main id="contenu" tabindex="-1">
+    <!-- ============ Hero : vidéo plein écran (source : src/site.config.js → hero) ============ -->
+    <section class="hero" aria-label="Monkey Events">
+      <div class="hero__media" data-hero-video>
+        <video muted loop playsinline disablepictureinpicture disableremoteplayback preload="none" aria-hidden="true" tabindex="-1"></video>
+      </div>
+      <div class="hero__veil" aria-hidden="true"></div>
+      <h1 class="sr-only" data-i18n="home.h1">Monkey Events, événements et séjours d’exception</h1>
+      <div class="hero__foot wrap">
+        <a class="hero__scroll" href="#univers">
+          <span class="hero__scroll-ico" aria-hidden="true">{{icon:arrow-down}}</span>
+          <span class="sr-only" data-i18n="home.scroll">Faire défiler vers la suite</span>
+        </a>
+        <p class="hero__place" lang="es">Ibiza</p>
+      </div>
+    </section>
+
+    <!-- ============ Deux portes : Événements / Contact (images : src/site.config.js → blocks) ============ -->
+    <section class="gates" id="univers" aria-label="Événements et contact" data-i18n-attr="aria-label:home.gates">
+      <a class="gate gate--evenements" href="/evenements" data-reveal>
+        <span class="gate__media" data-block-media="evenements" aria-hidden="true"></span>
+        <span class="gate__veil" aria-hidden="true"></span>
+        <span class="gate__body">
+          <span class="gate__label" data-i18n="home.gate.events">Événements</span>
+          <span class="gate__cta"><span data-i18n="home.gate.events.cta">Découvrir</span> <span class="gate__arrow" aria-hidden="true">{{icon:arrow-right}}</span></span>
+        </span>
+      </a>
+      <a class="gate gate--contact" href="/contact" data-reveal>
+        <span class="gate__media" data-block-media="contact" aria-hidden="true"></span>
+        <span class="gate__veil" aria-hidden="true"></span>
+        <span class="gate__body">
+          <span class="gate__label" data-i18n="home.gate.contact">Contact</span>
+          <span class="gate__cta"><span data-i18n="home.gate.contact.cta">Nous contacter</span> <span class="gate__arrow" aria-hidden="true">{{icon:arrow-right}}</span></span>
+        </span>
+      </a>
+    </section>
+
+    <!-- ============ Partenaires (logos : src/site.config.js → partners) ============ -->
+    <section class="partners" aria-labelledby="partners-t">
+      <div class="wrap">
+        <h2 class="partners__t" id="partners-t" data-reveal data-i18n="home.partners">Partenaires</h2>
+        <ul class="partners__list" data-partners data-reveal></ul>
+      </div>
+    </section>
+  </main>
+
+  <!-- @include footer -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

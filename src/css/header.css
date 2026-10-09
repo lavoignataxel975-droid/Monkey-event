@@ -1,0 +1,135 @@
+/* ---------- Header fixe : nom centré, navigation à droite ---------- */
+.hdr {
+  position: fixed; inset: 0 0 auto; z-index: 50;
+  height: var(--header-h);
+  color: var(--cream);
+  border-bottom: 1px solid transparent;
+  transition: color 0.35s var(--ease), background-color 0.45s var(--ease), border-color 0.45s var(--ease);
+}
+.hdr.is-solid {
+  color: var(--ink);
+  background: rgb(238 232 220 / 0.9);
+  border-bottom-color: rgb(86 102 75 / 0.22);       /* filet sauge */
+  -webkit-backdrop-filter: saturate(1.2) blur(14px);
+  backdrop-filter: saturate(1.2) blur(14px);
+}
+/* menu ouvert : le header se fond dans le panneau sauge profond */
+.hdr.is-open { color: var(--cream); background: var(--sage-800); border-bottom-color: rgb(244 239 229 / 0.12); }
+
+/* trois colonnes : la 1re et la 3e de même largeur → le nom est au centre exact */
+.hdr__in {
+  height: 100%;
+  display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center;   /* colonnes latérales strictement égales */
+  padding-inline: var(--gutter);
+}
+.hdr__brand {
+  grid-column: 2;
+  font: 500 clamp(0.85rem, 0.78rem + 0.35vw, 1.05rem) / 1 var(--font-display);
+  letter-spacing: var(--track-wide); text-transform: uppercase;
+  padding-left: var(--track-wide);       /* compense l'espacement après la dernière lettre */
+  white-space: nowrap;
+}
+
+.hdr__nav { grid-column: 3; justify-self: end; display: none; }
+.hdr__nav ul { display: flex; gap: clamp(24px, 2.4vw, 40px); }
+.hdr__nav a {
+  position: relative; display: block; padding-block: 10px;
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+}
+/* page active et survol : trait court, sauge sur fond clair, crème sur la vidéo */
+.hdr__nav a::after {
+  content: ''; position: absolute; left: 0; bottom: 3px;
+  width: 100%; height: 1px; background: currentColor;
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.5s var(--ease-out);
+}
+.hdr.is-solid .hdr__nav a::after { background: var(--sage-600); height: 2px; }
+.hdr__nav a[aria-current='page']::after { transform: scaleX(0.4); }
+@media (hover: hover) {
+  .hdr__nav a:hover::after { transform: scaleX(1); }
+}
+
+.hdr__toggle {
+  grid-column: 3; justify-self: end;
+  width: 44px; height: 44px; margin-right: -10px;
+  display: grid; place-items: center;
+}
+.hdr__bars, .hdr__bars::before {
+  display: block; width: 24px; height: 1px; background: currentColor;
+  transition: transform 0.4s var(--ease);
+}
+.hdr__bars { position: relative; transform: translateY(-4px); }
+.hdr__bars::before { content: ''; position: absolute; left: 0; top: 8px; }
+.hdr.is-open .hdr__bars { transform: rotate(45deg); }
+.hdr.is-open .hdr__bars::before { transform: translateY(-8px) rotate(-90deg); }
+
+@media (min-width: 1024px) {
+  .hdr__nav { display: block; }
+  .hdr__toggle { display: none; }
+}
+.hdr :focus-visible { outline-color: currentColor; }
+
+/* ---------- Menu compact (mobile, tablette) : panneau sauge profond ---------- */
+.menu {
+  position: fixed; inset: 0; z-index: 40;
+  background: var(--sage-800); color: var(--cream);
+  padding: calc(var(--header-h) + 5vh) var(--gutter) 40px;
+  display: flex; flex-direction: column;
+  opacity: 0; transition: opacity 0.4s var(--ease);
+}
+.menu.is-open { opacity: 1; }
+.menu__nav li { border-bottom: 1px solid rgb(244 239 229 / 0.14); }
+.menu__nav a {
+  display: block; padding-block: 18px;
+  font: 300 clamp(2.2rem, 1.5rem + 3.4vw, 3.4rem) / 1.1 var(--font-display);
+  letter-spacing: -0.04em;
+  transform: translateY(14px); opacity: 0;
+  transition: transform 0.7s var(--ease-out), opacity 0.7s var(--ease-out), color var(--t-fast) var(--ease);
+}
+.menu.is-open a { transform: none; opacity: 1; }
+.menu.is-open li:nth-child(2) a { transition-delay: 0.06s; }
+.menu.is-open li:nth-child(3) a { transition-delay: 0.12s; }
+.menu__nav a[aria-current='page'] { color: var(--sage-300); font-style: italic; }
+.menu :focus-visible { outline-color: var(--cream); }
+@media (min-width: 1024px) { .menu { display: none; } }
+
+/* ---------- Sélecteur de langue : FR / EN, curseur glissant (coin supérieur gauche) ---------- */
+.lang {
+  grid-column: 1; justify-self: start;
+  position: relative; display: inline-grid; grid-template-columns: 1fr 1fr;
+  border: 1px solid rgb(244 239 229 / 0.42);
+  transition: border-color 0.45s var(--ease);
+}
+.lang__thumb {
+  position: absolute; inset: 0 auto 0 0; width: 50%;
+  background: var(--cream);
+  transition: transform 0.5s var(--ease-out), background-color 0.45s var(--ease);
+}
+.lang[data-active='en'] .lang__thumb { transform: translateX(100%); }
+.lang__opt {
+  position: relative; z-index: 1;
+  width: 36px; height: 28px; display: grid; place-items: center;
+  padding-left: 0.14em;                       /* compense l'espacement après la dernière lettre */
+  font-size: 0.66rem; font-weight: 500; letter-spacing: 0.14em;
+  color: var(--cream-mute);
+  transition: color 0.45s var(--ease);
+}
+.lang__opt::before { content: ''; position: absolute; inset: -8px -2px; }   /* zone tactile élargie */
+.lang__opt[aria-pressed='true'] { color: var(--ink); cursor: default; }
+@media (hover: hover) { .lang__opt[aria-pressed='false']:hover { color: var(--cream); } }
+.lang__opt:focus-visible { outline: 1px solid currentColor; outline-offset: 3px; }
+
+/* header plein (beige) : cadre sauge, curseur sauge profond */
+.hdr.is-solid:not(.is-open) .lang { border-color: rgb(86 102 75 / 0.45); }
+.hdr.is-solid:not(.is-open) .lang__thumb { background: var(--sage-800); }
+.hdr.is-solid:not(.is-open) .lang__opt { color: var(--sage-600); }
+.hdr.is-solid:not(.is-open) .lang__opt[aria-pressed='true'] { color: var(--cream); }
+@media (hover: hover) { .hdr.is-solid:not(.is-open) .lang__opt[aria-pressed='false']:hover { color: var(--ink); } }
+
+/* petits écrans : interrupteur plus compact et nom un peu resserré, pour garder le nom au centre exact */
+@media (max-width: 479px) {
+  .lang__opt { width: 28px; height: 26px; font-size: 0.62rem; letter-spacing: 0.1em; padding-left: 0.1em; }
+}
+@media (max-width: 374px) {
+  .hdr__brand { font-size: 0.8rem; letter-spacing: 0.22em; padding-left: 0.22em; }
+}
