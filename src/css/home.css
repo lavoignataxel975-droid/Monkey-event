@@ -1,6 +1,5 @@
 /* ==========================================================================
-   Accueil V2 : hero vidéo · deux portes asymétriques · partenaires sur sauge clair
-   Rythme des fonds au défilement : vidéo → beige → sauge clair → sauge profond (footer)
+   Accueil : hero vidéo · trois portes (Production / Events / Conciergerie) · partenaires
    ========================================================================== */
 
 /* ---------- Hero ---------- */
@@ -8,7 +7,7 @@
   position: relative; isolation: isolate;
   height: 100svh; min-height: 520px;
   display: flex; align-items: flex-end;
-  color: var(--cream); background: var(--ink);
+  color: var(--cream); background: var(--tape);
   overflow: clip;
 }
 .hero__media { position: absolute; inset: 0; z-index: -2; }
@@ -18,27 +17,20 @@
 }
 @keyframes hero-in { from { transform: scale(1.06); opacity: 0.4; } }
 
-/* sortie du hero : la vidéo s'assombrit et recule légèrement pendant qu'on fait défiler (navigateurs compatibles) */
-@supports (animation-timeline: view()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .hero__media {
-      animation: hero-out linear both;
-      animation-timeline: view();
-      animation-range: exit 0% exit 100%;
-    }
-  }
-}
-@keyframes hero-out { to { transform: scale(1.06); filter: brightness(0.55); } }
-
 /* fond temporaire si aucune vidéo n'est disponible (src/site.config.js → hero) */
 .hero__media.is-placeholder video { display: none; }
-.hero__media.is-placeholder { background: var(--sage-900); }
+.hero__media.is-placeholder {
+  background:
+    radial-gradient(120% 80% at 70% 20%, rgb(139 154 127 / 0.28), transparent 60%),
+    radial-gradient(90% 70% at 15% 90%, rgb(232 56 47 / 0.08), transparent 65%),
+    linear-gradient(160deg, var(--surface-2), var(--tape));
+}
 
 .hero__veil {
   position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background: linear-gradient(180deg,
-    rgb(27 30 26 / 0.5) 0%, rgb(27 30 26 / 0) 22%,
-    rgb(27 30 26 / 0) 52%, rgb(27 30 26 / 0.6) 100%);
+    rgb(28 26 23 / 0.5) 0%, rgb(28 26 23 / 0) 22%,
+    rgb(28 26 23 / 0) 52%, rgb(28 26 23 / 0.62) 100%);
 }
 
 .hero__foot {
@@ -48,13 +40,14 @@
   padding-bottom: var(--foot-pad);
 }
 
-/* destination en exemple : discrète, en italique */
+/* destination en exemple : discrète, secondaire par rapport à la vidéo */
 .hero__place {
-  font: italic 400 clamp(0.75rem, 0.7rem + 0.25vw, 0.9rem) / 36px var(--font-display);   /* 36px = hauteur de la flèche */
-  letter-spacing: 0.32em; text-transform: uppercase;
-  margin-right: -0.32em;
+  font: 500 clamp(0.68rem, 0.62rem + 0.22vw, 0.82rem) / 36px var(--font-wide);   /* 36px = hauteur de la flèche : même ligne */
+  font-stretch: var(--wide);
+  letter-spacing: 0.5em; text-transform: uppercase;
+  margin-right: -0.5em;                    /* la dernière lettre s'aligne sur la marge */
   color: var(--cream-mute);
-  text-shadow: 0 1px 16px rgb(27 30 26 / 0.35);
+  text-shadow: 0 1px 16px rgb(28 26 23 / 0.35);
 }
 
 /* flèche : centrée en bas du hero, petite et peu contrastée */
@@ -62,147 +55,216 @@
   position: absolute; left: 0; right: 0; bottom: var(--foot-pad);
   width: fit-content; margin-inline: auto;
   display: grid; place-items: center;
-  color: rgb(244 239 229 / 0.6);
+  color: rgb(246 241 232 / 0.55);
   transition: color var(--t-fast) var(--ease);
 }
 .hero__scroll-ico {
   display: grid; place-items: center;
   width: 36px; height: 36px; border-radius: 50%;
-  border: 1px solid rgb(244 239 229 / 0.24);
-  font-size: 15px;
+  border: 1px solid rgb(246 241 232 / 0.22);
   transition: border-color var(--t-fast) var(--ease), background-color var(--t-fast) var(--ease);
 }
+.hero__scroll svg { width: 9px; height: 14px; }
+.hero__scroll::before { content: ''; position: absolute; inset: -6px; }   /* zone tactile 48 px */
 @media (hover: hover) {
   .hero__scroll:hover { color: var(--cream); }
-  .hero__scroll:hover .hero__scroll-ico { border-color: var(--sage-300); background: rgb(140 155 126 / 0.18); }
+  .hero__scroll:hover .hero__scroll-ico { border-color: rgb(246 241 232 / 0.6); background: rgb(246 241 232 / 0.06); }
 }
 .hero__scroll:focus-visible { outline-color: var(--cream); border-radius: 50%; }
 @media (prefers-reduced-motion: no-preference) {
-  .hero__scroll .icon { animation: nudge 2.6s var(--ease) infinite; }
+  .hero__scroll svg { animation: nudge 2.6s var(--ease) infinite; }
   .hero__place, .hero__scroll { animation: rise 1.4s var(--ease-out) both; }
   .hero__place { animation-delay: 0.5s; }
   .hero__scroll { animation-delay: 0.8s; }
 }
-@keyframes nudge { 0%, 60%, 100% { transform: none; } 30% { transform: translateY(3px); } }
+@keyframes nudge { 0%, 60%, 100% { transform: none; } 30% { transform: translateY(4px); } }
 @keyframes rise { from { opacity: 0; transform: translateY(18px); } }
 
-/* ---------- Deux portes : Événements (photo, plus large) / Contact (sauge profond) ---------- */
+
+/* ---------- Trois portes : Production (grand bloc) / Events / Conciergerie ----------
+   Salle noire (--night) dans le prolongement du hero ; joints fins entre les panneaux.
+   Mobile : empilées · tablette : Production en bandeau + deux portraits · ordinateur : Production en grand, deux paysages superposés. */
 .gates {
-  display: grid; gap: calc(var(--gutter) * 0.5);
-  padding: calc(var(--gutter) * 0.5);
+  --seam: clamp(6px, 0.6vw, 10px);
+  display: grid; gap: var(--seam);
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: 'production' 'events' 'conciergerie';
+  padding: var(--seam);
+  background: var(--night);
 }
+/* ancres du header (#events…) : chaque porte s'arrête sous le header, joint visible */
+.gate { scroll-margin-top: var(--seam); }
+.gate--events { grid-area: events; }
+.gate--production { grid-area: production; }
+.gate--conciergerie { grid-area: conciergerie; }
+
 .gate {
   position: relative; isolation: isolate; overflow: hidden;
   display: flex; align-items: flex-end;
-  min-height: min(78svh, 620px);
-  color: var(--cream); background: var(--sage-800);
+  aspect-ratio: 4 / 3; max-height: 72svh;
+  border-radius: var(--radius);
   container-type: inline-size;
+  color: var(--cream); background: var(--surface);
 }
+.gate--production { aspect-ratio: 4 / 5; max-height: 82svh; }
+
 @media (min-width: 720px) {
-  .gates { grid-template-columns: 7fr 5fr; }   /* composition asymétrique : la photo domine */
-  .gate { min-height: max(480px, min(calc(100svh - var(--header-h) - var(--gutter)), 75vw)); }
+  .gates {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas: 'production production' 'events conciergerie';
+  }
+  .gate { aspect-ratio: 4 / 5; max-height: 70svh; }
+  .gate--production { aspect-ratio: 16 / 10; max-height: 72svh; }
+}
+@media (min-width: 1024px) {
+  /* un écran exactement sous le header (l'ancre #univers s'arrête sous le header) ; plafonné à 2/3 de la largeur (tablettes en portrait) */
+  .gates {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    grid-template-areas: 'production events' 'production conciergerie';
+    --gates-h: max(560px, min(calc(100svh - var(--header-h)), 66vw));
+    height: var(--gates-h);
+  }
+  /* Conciergerie est sous Events : son ancre ramène tout le bloc à l'écran, comme les deux autres */
+  .gate--conciergerie { scroll-margin-top: calc(var(--seam) * 2 + (var(--gates-h) - var(--seam) * 3) / 2); }
+  .gate, .gate--production { aspect-ratio: auto; max-height: none; min-height: 0; }
 }
 
 .gate__media { position: absolute; inset: 0; z-index: -2; transition: transform 1.6s var(--ease-out); }
 .gate__media img { width: 100%; height: 100%; object-fit: cover; }
 
-/* bloc sans photo (Contact pour l'instant) : aplat sauge profond, sans mention provisoire */
-.gate__media.is-placeholder { background: var(--sage-800); }
-.gate--contact .gate__veil { display: none; }
+/* fonds temporaires (src/site.config.js → blocks) : même cadrage que le visuel définitif */
+.gate__media.is-placeholder::after {
+  content: 'Visuel à venir';
+  position: absolute; top: clamp(18px, 2.2vw, 32px); right: clamp(18px, 2.2vw, 32px);
+  font: 500 0.62rem / 1 var(--font-text); letter-spacing: 0.24em; text-transform: uppercase;
+  color: rgb(246 241 232 / 0.5);
+}
+.gate--production .gate__media.is-placeholder {
+  background:
+    radial-gradient(90% 70% at 80% 10%, rgb(139 154 127 / 0.35), transparent 60%),
+    linear-gradient(170deg, #26241f, var(--surface) 70%);
+}
+.gate--events .gate__media.is-placeholder {
+  background:
+    radial-gradient(80% 90% at 12% 100%, rgb(139 154 127 / 0.3), transparent 62%),
+    linear-gradient(200deg, #24221f, var(--night) 75%);
+}
+.gate--conciergerie .gate__media.is-placeholder {
+  background:
+    radial-gradient(90% 80% at 88% 0%, rgb(232 56 47 / 0.12), transparent 60%),
+    linear-gradient(170deg, #2a2724, #141312 78%);
+}
 
 .gate__veil {
   position: absolute; inset: 0; z-index: -1;
-  background: linear-gradient(0deg, rgb(27 30 26 / 0.62) 0%, rgb(27 30 26 / 0.1) 55%, rgb(27 30 26 / 0.04) 100%);
+  background: linear-gradient(0deg, rgb(20 19 17 / 0.72) 0%, rgb(20 19 17 / 0.18) 50%, rgb(20 19 17 / 0.06) 100%);
   transition: opacity 0.8s var(--ease);
 }
 
-.gate__body {
-  width: 100%;
-  display: flex; flex-direction: column; gap: 22px;
-  padding: clamp(24px, 3.4vw, 60px);
+/* cadre de visée : filet clair en retrait, révélé au survol et au focus */
+.gate__frame {
+  position: absolute; inset: clamp(10px, 1.1vw, 16px); z-index: 0; pointer-events: none;
+  border: 1px solid rgb(246 241 232 / 0.32);
+  opacity: 0; transform: scale(1.02);
+  transition: opacity 0.6s var(--ease), transform 0.9s var(--ease-out);
 }
-.gate__label {
-  font: 300 clamp(2.6rem, 1.4rem + 4.6vw, 7rem) / 0.95 var(--font-display);
-  font-size: min(clamp(2.6rem, 1.4rem + 4.6vw, 7rem), 12.5cqi);   /* « Événements » tient toujours dans son bloc */
-  letter-spacing: -0.05em;
-}
-.gate--contact .gate__label { font-style: italic; }
 
-/* lien : trait sauge qui s'allonge au survol */
-.gate__cta {
-  display: inline-flex; align-items: center; gap: 14px;
-  width: fit-content; padding-bottom: 8px;
-  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--cream);
-  background: linear-gradient(var(--sage-300), var(--sage-300)) 0 100% / 32px 1px no-repeat;
-  transition: background-size 0.7s var(--ease-out);
+.gate__body {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: flex-start; gap: clamp(12px, 1.4vw, 20px);
+  padding: clamp(22px, 3cqi, 52px);
 }
-.gate__arrow { display: inline-grid; font-size: 14px; transition: transform 0.6s var(--ease-out); }
+/* voix studio : grotesque large, légère ; la taille suit la largeur du panneau (« CONCIERGERIE » tient toujours) */
+.gate__label {
+  font: 300 min(clamp(2.2rem, 1rem + 4.4vw, 7rem), 8.2cqi) / 0.9 var(--font-wide);
+  font-stretch: var(--wide);
+  letter-spacing: -0.015em; text-transform: uppercase;
+}
+/* voix luxe : Cormorant italique, filet sauge qui se trace au survol */
+.gate__cta {
+  position: relative; display: inline-flex; align-items: baseline; gap: 12px;
+  padding-bottom: 6px;
+  font: italic 400 clamp(1.1rem, 1rem + 0.4vw, 1.4rem) / 1.1 var(--font-display);
+  letter-spacing: 0.01em;
+  color: var(--cream-mute);
+  transition: color var(--t-fast) var(--ease);
+}
+.gate__cta::after {
+  content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+  background: var(--sage); transform: scaleX(0.28); transform-origin: left;
+  transition: transform 0.7s var(--ease-out);
+}
+.gate__arrow { display: inline-block; font-style: normal; transition: transform 0.6s var(--ease-out); }
 
 @media (hover: hover) {
-  .gate:hover .gate__media { transform: scale(1.04); }
-  .gate:hover .gate__veil { opacity: 0.85; }
-  .gate:hover .gate__cta { background-size: 100% 1px; }
-  .gate:hover .gate__arrow { transform: translateX(5px); }
+  .gate:hover .gate__media { transform: scale(1.035); }
+  .gate:hover .gate__veil { opacity: 0.82; }
+  .gate:hover .gate__frame { opacity: 1; transform: none; }
+  .gate:hover .gate__cta { color: var(--cream); }
+  .gate:hover .gate__cta::after { transform: none; }
+  .gate:hover .gate__arrow { transform: translateX(6px); }
 }
-.gate:focus-visible { outline: 2px solid var(--cream); outline-offset: -10px; }
-.gate:focus-visible .gate__cta { background-size: 100% 1px; }
+.gate:focus-visible { outline: none; }
+.gate:focus-visible .gate__frame { opacity: 1; transform: none; border-color: var(--cream); }
+.gate:focus-visible .gate__cta::after { transform: none; }
+.gate:focus-visible .gate__arrow { transform: translateX(6px); }
 
-/* entrée des portes : la photo se découvre de bas en haut (après la vidéo, le récit continue) */
+/* arrivée par le header (#production…) : le cadre de visée s'allume un instant sur la porte visée */
+.gate:target .gate__frame { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: no-preference) {
-  .has-reveal .gate[data-reveal] {
-    opacity: 1; transform: none;
-    clip-path: inset(14% 0 0 0);
-    transition: clip-path 1.3s var(--ease-out);
-  }
-  .has-reveal .gate[data-reveal].is-in { clip-path: inset(0 0 0 0); }
-  .has-reveal .gate[data-reveal]:nth-child(2) { transition-delay: 0.12s; }
+  .gate:target .gate__frame { animation: frame-ping 2.4s var(--ease) 0.5s both; }
+}
+@keyframes frame-ping { 0% { opacity: 0; transform: scale(1.02); } 25%, 60% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
+
+/* entrée à l'écran (js/reveal.js) : un volet couleur salle noire se replie vers le haut, l'image se pose.
+   Volet = calque au-dessus (transform), jamais clip-path sur le lien : l'IntersectionObserver doit toujours le voir. */
+.has-reveal .gates .gate[data-reveal] { opacity: 1; transform: none; transition: none; }
+.has-reveal .gates .gate[data-reveal]::before {
+  content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: var(--night);
+  transform-origin: top;
+  transition: transform 1.3s var(--ease-out);
+}
+.has-reveal .gates .gate[data-reveal].is-in::before { transform: scaleY(0); }
+.has-reveal .gates .gate[data-reveal] .gate__media { transform: scale(1.12); }
+.has-reveal .gates .gate[data-reveal].is-in .gate__media { transform: none; }
+.has-reveal .gates .gate[data-reveal]:nth-child(2)::before,
+.has-reveal .gates .gate[data-reveal]:nth-child(2) .gate__media { transition-delay: 0.12s; }
+.has-reveal .gates .gate[data-reveal]:nth-child(3)::before,
+.has-reveal .gates .gate[data-reveal]:nth-child(3) .gate__media { transition-delay: 0.24s; }
+@media (hover: hover) {
+  .has-reveal .gates .gate[data-reveal].is-in:hover .gate__media { transform: scale(1.035); transition-delay: 0s; }
 }
 
-/* ---------- Partenaires : sauge clair, titre à gauche, logos à droite ---------- */
-.partners {
-  background: var(--sage-50);
-  padding-block: clamp(88px, 15vh, 184px);
-  margin-top: calc(var(--gutter) * 0.5);
-}
-.partners .wrap {
-  display: grid; gap: clamp(40px, 6vh, 64px);
-}
-@media (min-width: 900px) {
-  .partners .wrap { grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); align-items: start; }
-}
+/* ---------- Partenaires ---------- */
+.partners { padding-block: clamp(88px, 14vh, 180px); }
 .partners__t {
-  font: italic 300 clamp(2.6rem, 1.4rem + 3.6vw, 5.2rem) / 1.05 var(--font-display);
-  letter-spacing: -0.045em;
-  color: var(--sage-700);
+  text-align: center; margin-bottom: clamp(48px, 7vh, 88px);
+  font: 300 clamp(2.2rem, 1.4rem + 3vw, 4.2rem) / 1 var(--font-display);
+  letter-spacing: 0.04em;
 }
 .partners__list {
-  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: clamp(12px, 1.4vw, 20px);
+  display: flex; flex-wrap: wrap; justify-content: center;   /* dernière ligne centrée */
+  gap: clamp(12px, 1.6vw, 24px);
+  max-width: 1200px; margin-inline: auto;
 }
-/* 6 colonnes : 3 logos par rangée ; une dernière rangée de 2 s'élargit pour remplir la ligne */
-@media (min-width: 600px) {
-  .partners__list { grid-template-columns: repeat(6, minmax(0, 1fr)); }
-  .partner { grid-column: span 2; }
-  .partner:nth-child(3n + 1):nth-last-child(2), .partner:nth-child(3n + 2):last-child { grid-column: span 3; }
-}
-/* mobile : nombre impair → la dernière case prend toute la ligne */
-@media (max-width: 599px) { .partner:last-child:nth-child(odd) { grid-column: 1 / -1; aspect-ratio: 3 / 1; } }
 .partner {
+  flex: 0 1 calc((100% - 4 * clamp(12px, 1.6vw, 24px)) / 5);
+  min-width: 140px;
   aspect-ratio: 3 / 2;
   display: grid; place-items: center;
-  background: var(--beige);
-  border: 1px solid rgb(86 102 75 / 0.16);
+  border: 1px solid var(--line); border-radius: var(--radius);
 }
 .partner > a { display: grid; place-items: center; width: 100%; height: 100%; }
 .partner img {
-  max-width: 66%; max-height: 52px; width: auto; height: auto; object-fit: contain;
-  opacity: 0.88; transition: opacity var(--t-fast) var(--ease);
+  max-width: 68%; max-height: 52px; width: auto; height: auto; object-fit: contain;
+  opacity: 0.86; transition: opacity var(--t-fast) var(--ease);
 }
 @media (hover: hover) { .partner a:hover img { opacity: 1; } }
 
-.partner--empty { background: transparent; border: 1px dashed rgb(86 102 75 / 0.32); }
+.partner--empty { border-style: dashed; border-color: rgb(242 239 232 / 0.16); }
 .partner--empty span {
   font-size: 0.62rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
-  color: var(--sage-600);
+  color: var(--cassette);
 }

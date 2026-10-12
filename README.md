@@ -1,27 +1,44 @@
-# Monkey Events V2
+# Monkey Production : site (version VHS)
 
-Site vitrine de Monkey Events (événements et séjours d'exception). HTML, CSS et JS sans framework, servis par Vite.
+Site vitrine de Monkey Production : production de clips (activité principale), événements, conciergerie de luxe. HTML, CSS et JS sans framework, servis par Vite.
+Copie du site « Site Web » (V1, port 5230, inchangée), refondue en direction « VHS 2000s × Streetwear × Luxe moderne ».
 
 ```bash
 npm install
-npm run dev       # http://localhost:5240
+npm run dev       # http://localhost:5250
 npm run build     # → dist/
 ```
+
+Prévisualisation responsive (outil local, `npm run dev` seulement, absent du build) : http://localhost:5250/responsive-preview
+Le site dans un iPhone 16 (393 × 852) et un iPad (820 × 1180 ou 1180 × 820), deux iframes au défilement indépendant ;
+choix de la page, orientation de l'iPad (auto / portrait / paysage), cadres affichés ou masqués, actualiser, haut de page par appareil.
+Fichiers : `responsive-preview.html`, `src/preview/` ; route déclarée dans `vite.config.js` → `devOnly`.
 
 ## Structure
 
 | Fichier | Rôle |
 |---|---|
-| `index.html` | Accueil : hero vidéo, blocs Événements / Contact, partenaires |
+| `index.html` | Accueil : hero vidéo, trois portes Events / Production / Conciergerie, partenaires |
+| `production.html` | Production : hero, projets Aya Nakamura « Chimiyé » et Julien Doré « Nous », invitation « Parlons de votre projet » → /contact (`src/js/slots.js`, `src/css/production.css`) ; page en salle noire (`body.is-night`) |
+| `conciergerie.html` | Conciergerie : hero, rôle d'une conciergerie de luxe, 4 exemples de demandes (illustratifs), invitation → /contact (`src/css/conciergerie.css`) ; page claire, pendant de Production |
 | `contact.html` | Contact : coordonnées + formulaire (`src/js/contact.js`) |
 | `evenements.html` | Événements : texte d'introduction + grille des destinations (`src/js/destinations.js`) |
 | `mentions-legales.html` | Page à concevoir (structure de navigation seulement) |
-| `partials/header.html`, `partials/footer.html` | Header et footer communs (`<!-- @include header -->`) |
+| `partials/header.html`, `partials/footer.html` | Header et footer communs (`<!-- @include header -->`) ; header : nom à gauche, navigation à droite Accueil · Events (`/evenements`) · Production (`/production`) · Conciergerie (`/conciergerie`) · Contact ; même liste dans le menu mobile |
 | `src/site.config.js` | **Médias du site** (seul fichier à modifier pour les brancher) |
 | `src/css/` | `tokens.css` (palette, typo), `base.css`, `header.css`, `home.css`, `footer.css` |
 | `src/js/` | `header.js` (header fixe, menu mobile), `hero-video.js`, `media.js`, `reveal.js` |
 
-URL propres : `/evenements`, `/contact`, `/mentions-legales` (dev : `vite.config.js` ; production : `vercel.json` → `cleanUrls`).
+URL propres : `/evenements`, `/production`, `/conciergerie`, `/contact`, `/mentions-legales` (dev : `vite.config.js` ; production : `vercel.json` → `cleanUrls`).
+
+## Direction artistique : VHS 2000s × Streetwear × Luxe moderne
+
+- **Source unique** : `src/css/tokens.css` (palette, polices) et `src/css/vhs.css` (effets et composants communs). Les anciens noms de variables (`--beige`, `--ink`…) y pointent vers la palette VHS.
+- **Palette** : noir bande `#0B0B0A`, off-white `#F2EFE8`, gris cassette `#8C8982`, surfaces `#171615` / `#211F1D`, accent unique rouge REC `#E8382F`.
+- **Polices** : Anton (titres, `--font-wide`), Archivo (texte), IBM Plex Mono (OSD, tags, libellés, `--font-mono`), Cormorant italique (accroches, `--font-display`).
+- **Effets** : grain et scanlines fixes ; décalage RGB au survol des grands titres ; OSD caméscope (REC, date, timecode réels : `src/js/vhs.js`, attributs `data-osd-tc`, `data-osd-date`, `data-osd-time`) dans les heros, les vidéos de Production et la bande `.osd-strip` (Contact, Mentions légales) ; bande de tracking à l'arrivée sur chaque page ; tags `.vhs-tag` (DROP 01…). Tout est coupé si l'utilisateur réduit les animations.
+- **Hero vidéo commun** (`.hero.vhs-hero`, styles dans `vhs.css`) : accueil, Production, Events, Conciergerie (pas Contact). Vidéo `hero` de `src/site.config.js` partout (Production : `production.hero` la remplace si renseigné). Titre monumental toujours entier : taille = largeur utile ÷ `--fit` (largeur du mot en em sur Anton), plafonnée par `--cap` ; « MONKEY PRODUCTION » passe sur deux lignes en portrait. Nouveau titre : ajouter une variante `.vhs-hero__t--x { --fit: … }`.
+- **Navigation** (header, menu mobile, footer, portes de l'accueil) : Accueil · Production · Events · Conciergerie · Contact. Curseur du navigateur, aucun curseur personnalisé.
 
 ## Médias
 
@@ -31,32 +48,15 @@ Tant qu'un média vaut `null`, son emplacement affiche un fond temporaire neutre
 | Média | Dossier | Déclaration (`src/site.config.js`) | Format conseillé |
 |---|---|---|---|
 | Vidéo du hero | `public/media/hero/` | `hero.video.desktop`, `hero.video.mobile`, `hero.poster` | MP4 H.264 sans son, 16:9 ; 1920 px (≈ 8 Mo) + 1280 px pour mobile (≈ 3,5 Mo) ; poster JPG 1920 px |
-| Image du bloc Événements | `public/media/blocks/` | `blocks.evenements = { src: '/media/blocks/evenements.jpg' }` | JPG/WebP, portrait ou carré, ≥ 1600 px de haut |
-| Image du bloc Contact | `public/media/blocks/` | `blocks.contact = { src: '/media/blocks/contact.jpg' }` | idem |
-| Logo Monkey Events | `public/media/logo/` | `logo = { src: '/media/logo/monkey-events.svg', alt: 'Monkey Events' }` | SVG clair (affiché sur fond noir) |
+| Image de la porte Events | `public/media/blocks/` | `blocks.events = { src: '/media/blocks/events.jpg' }` | JPG/WebP ≥ 2000 × 2000 px, sujet centré (affichée ≈ carrée sur ordinateur, 16:10 sur tablette, 4:5 sur mobile) |
+| Image de la porte Production | `public/media/blocks/` | `blocks.production = { src: '/media/blocks/production.jpg' }` | JPG/WebP ≥ 1800 × 1800 px, sujet centré (≈ 3:2 sur ordinateur, 4:5 sur tablette, 4:3 sur mobile) |
+| Image de la porte Conciergerie | `public/media/blocks/` | `blocks.conciergerie = { src: '/media/blocks/conciergerie.jpg' }` | idem Production |
+| Logo Monkey Production | `public/media/logo/` | `logo = { src: '/media/logo/monkey-production.svg', alt: 'Monkey Production' }` | SVG clair (affiché sur fond noir) |
 | Photos des destinations | `public/media/destinations/` | `destinations = [{ name, image: { src, webp, sizes, position }, alt }]` | JPG + WebP, ≥ 1000 px de large ; recadrée en paysage sur ordinateur, en portrait (4:5) sur mobile |
+| Médias de la page Production | `public/media/production/` | `production.hero` (vidéo du hero de la page ; `null` = vidéo de l'accueil), `production.aya.{main, side1, side2}`, `production.dore.{main, side1, side2}` = `{ video: { src, mobile?, poster } }` ou `{ image: { src }, alt }` | hero : vidéo plein écran recadrée ; Aya : extrait 16:9, images 4:5 et 3:4 ; Doré : extrait 4:3 (16:9 mobile), images 1:1 et 3:2. Vidéos MP4 H.264 sans son : chargées seulement à l'approche de l'écran |
+| Photos de la page Conciergerie | `public/media/conciergerie/` | `conciergerie.hero`, `.wide`, `.detail`, `.services.{travel, access, artists, custom}` (même syntaxe que Production) | hero ≈ 4:5 ; wide 21:9 (4:3 mobile) ; detail 4:5 ; demandes 4:5, 1:1, 3:2, 3:4 |
 | Logos partenaires | `public/media/partners/` | `partners = [{ name, logo, url? }, …]` | SVG ou PNG transparent, recadré au plus près |
 
 Option `position` pour les images des blocs (ex. `{ src, position: '50% 30%' }`) : point de cadrage du recadrage `cover`.
 
 La vidéo actuelle (`public/media/hero/`) est une version web de `../Pics /monkey-events-hero.mp4` (original non modifié).
-
-## V2 : direction artistique
-
-Copie indépendante de `../Site Web` (V1, port 5230), même contenu et mêmes fonctionnalités ; seule l'identité visuelle change.
-
-- **Typographie** : Geist (licence OFL, `@fontsource-variable/geist`), seule police du site : titres en graisse 300 et approche resserrée, accents en vraie italique, libellés en capitales espacées. Remplace Bodoni Moda + Manrope (Sequel Sans demandée, non disponible sans licence).
-- **Couleurs** (`src/css/tokens.css`) : beige `#eee8dc`, noir doux légèrement vert `#1b1e1a`, gamme sauge de `--sage-50` (fonds clairs) à `--sage-900` (pied de page). Contrastes WCAG AA vérifiés.
-- **Rythme des fonds à l'accueil** : vidéo, beige, sauge clair (partenaires), sauge profond (pied de page).
-- **Angles droits partout**, icônes Phosphor (`{{icon:nom}}` dans le HTML, graisse light).
-- **Événements** : grille de 12 colonnes, motif de 7 cartes qui se répète (paysage + portrait décalé, portrait + paysage, trois portraits en escalier).
-- **Bloc Contact de l'accueil** : aplat sauge profond tant que `blocks.contact` vaut `null`.
-
-## Langues (FR / EN)
-
-- Dictionnaires : `src/i18n/fr.js` et `src/i18n/en.js` (mêmes clés) ; moteur : `src/i18n/index.js`.
-- HTML : `data-i18n="clé"` (texte) et `data-i18n-attr="aria-label:clé; content:clé"` (attributs, titre, description).
-- JS : `t('clé')` et `onLangChange(fn)` pour re-traduire un composant (formulaire, menu, partenaires, textes alternatifs).
-- Sélecteur : coin supérieur gauche du header (`partials/header.html`, `src/js/lang-switch.js`).
-- Langue mémorisée dans le navigateur (`localStorage`, clé `monkey-events-lang`) ; `partials/head.html` l'applique avant l'affichage.
-- Textes alternatifs des destinations : `alt: { fr, en }` dans `src/site.config.js`.

@@ -1,0 +1,185 @@
+/* ==========================================================================
+   Production : hero vidéo (vhs.css) · accroche · Aya Nakamura · Julien Doré · votre prochain projet
+   Page entière en salle noire (body.is-night). Deux projets, deux écritures :
+   - Aya Nakamura : voix studio (grotesque large), cadre 16:9 plein, images secondaires en escalier.
+   - Julien Doré : voix poétique (Cormorant italique), cadre 4:3 décentré, images qui chevauchent l'extrait.
+   ========================================================================== */
+.is-night { background: var(--night); color: var(--cream); }
+.is-night ::selection { background: var(--sage); color: var(--night); }
+.is-night :focus-visible { outline-color: var(--sage); }
+
+/* ---------- Emplacements médias (src/js/slots.js) ---------- */
+.slot {
+  position: relative; isolation: isolate; overflow: hidden;
+  width: 100%;
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.slot > img, .slot > video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+/* fond temporaire : même cadrage que le média définitif, libellé discret */
+.slot.is-placeholder {
+  background:
+    radial-gradient(90% 80% at 85% 0%, rgb(232 56 47 / 0.1), transparent 60%),
+    linear-gradient(165deg, #22201e, #141312 75%);
+  box-shadow: inset 0 0 0 1px rgb(246 241 232 / 0.06);
+}
+.slot.is-placeholder::after {
+  content: attr(data-label);
+  position: absolute; top: clamp(16px, 2vw, 28px); right: clamp(16px, 2vw, 28px); left: clamp(16px, 2vw, 28px);
+  font: 500 0.62rem / 1.5 var(--font-text); letter-spacing: 0.24em; text-transform: uppercase; text-align: right;
+  color: rgb(246 241 232 / 0.45);
+}
+.slot--aya-a.is-placeholder, .slot--dore-b.is-placeholder {
+  background:
+    radial-gradient(80% 90% at 10% 100%, rgb(242 239 232 / 0.07), transparent 62%),
+    linear-gradient(200deg, #262421, #161514 78%);
+}
+
+/* entrée à l'écran : volet salle noire qui se replie (même geste que les portes de l'accueil) */
+.has-reveal .slot[data-reveal] { opacity: 1; transform: none; transition: none; }
+.has-reveal .slot[data-reveal]::before {
+  content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
+  background: var(--night); transform-origin: top;
+  transition: transform 1.3s var(--ease-out);
+}
+.has-reveal .slot[data-reveal].is-in::before { transform: scaleY(0); }
+.has-reveal .proj--dore .slot[data-reveal]::before { background: var(--surface); }
+
+/* ---------- Accroche sous le hero vidéo (le hero est commun : vhs.css) ---------- */
+.prod-hero { padding-block: clamp(56px, 10vh, 128px) clamp(80px, 13vh, 168px); }
+.prod-hero__lede {
+  max-width: 40ch;
+  font: italic 300 clamp(1.4rem, 1rem + 1.2vw, 2.1rem) / 1.25 var(--font-display);
+  color: var(--cream-mute);
+  text-wrap: balance;
+}
+@media (min-width: 900px) { .prod-hero__lede { margin-left: auto; text-align: right; } }
+
+/* ---------- Projets : éléments communs ---------- */
+.proj { padding-block: clamp(88px, 14vh, 180px); }
+/* « Clip musical » : même étiquette que les tags DROP (vhs.css) */
+.proj__kind {
+  display: inline-block; margin-bottom: clamp(16px, 2.4vh, 28px); padding: 5px 8px 4px;
+  font: 600 0.68rem / 1 var(--font-mono); letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--rec); border: 1px solid var(--rec);
+}
+.proj__title { display: flex; flex-direction: column; }
+.proj__text { display: grid; gap: 20px; align-content: start; }
+.proj__text p:not(.proj__lede) { max-width: 46ch; color: var(--cream-mute); line-height: 1.7; }
+.proj__lede {
+  font: 300 clamp(1.45rem, 1.1rem + 1vw, 2.1rem) / 1.25 var(--font-display);
+  color: var(--cream);
+  text-wrap: pretty;
+}
+.proj__work.is-empty {
+  font: italic 400 var(--fs-sm) / 1.4 var(--font-text); letter-spacing: 0.02em;
+  color: var(--cream-mute);
+}
+
+/* ---------- Aya Nakamura : grotesque large, cadre plein, images en escalier ---------- */
+.proj--aya .proj__artist {
+  font: 400 clamp(3.4rem, 1rem + 9.4vw, 12rem) / var(--lh-display) var(--font-wide);   /* le nom passe sur 2 lignes en 320 px */
+  letter-spacing: 0.005em; text-transform: uppercase;
+}
+.proj--aya .proj__work {
+  margin-top: 0.1em;
+  font: italic 300 clamp(2.2rem, 1rem + 4.6vw, 6rem) / 1.1 var(--font-display);
+  color: var(--cream-mute);
+}
+/* accroche : le retour de l'artiste, en capitales monumentales */
+.aya-statement {
+  max-width: 17ch; margin-top: clamp(48px, 9vh, 112px);
+  font: 400 clamp(2.2rem, 1rem + 4.4vw, 6.4rem) / var(--lh-display) var(--font-wide);
+  letter-spacing: 0.005em; text-transform: uppercase;
+  text-wrap: balance;
+}
+.aya-statement em { font-style: normal; color: var(--rec); }
+@media (min-width: 900px) { .aya-statement { margin-left: auto; text-align: right; } }
+
+/* le clip : grand cadre 16:9 bord à bord (jusqu'à 1600 px), écran cathodique */
+.slot--aya-main {
+  width: auto; aspect-ratio: 16 / 9; margin: clamp(48px, 8vh, 96px) calc(-1 * var(--gutter)) 0;
+  box-shadow: inset 0 0 90px rgb(0 0 0 / 0.6);
+}
+.slot--aya-main .slot__osd .tr { top: 0; right: 0; }
+@media (max-width: 599px) { .slot--aya-main .slot__osd .tr { display: none; } }   /* format du clip conservé (16:9) */
+
+.proj--aya .proj__body {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 32px);
+  margin-top: clamp(48px, 8vh, 96px);
+}
+.proj--aya .proj__text { grid-column: 1 / -1; margin-bottom: clamp(16px, 3vh, 32px); }
+.slot--aya-a { aspect-ratio: 4 / 5; }
+.slot--aya-b { aspect-ratio: 3 / 4; margin-top: clamp(48px, 10vw, 120px); }
+
+@media (min-width: 900px) {
+  .proj--aya .proj__work { padding-left: 16%; }
+  .proj--aya .proj__body { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: start; }
+  .proj--aya .proj__text { grid-column: 1 / span 5; margin-bottom: 0; }
+  .slot--aya-a { grid-column: 7 / span 3; }
+  .slot--aya-b { grid-column: 10 / span 3; margin-top: clamp(96px, 14vw, 220px); }
+}
+
+/* ---------- Julien Doré : Cormorant italique, cadre 4:3 décentré, images qui chevauchent ---------- */
+.proj--dore {
+  background:
+    radial-gradient(70% 50% at 100% 0%, rgb(232 56 47 / 0.06), transparent 70%),
+    var(--surface);
+}
+.proj--dore .proj__grid {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 32px);
+}
+.proj--dore .proj__head, .slot--dore-main, .proj--dore .proj__text { grid-column: 1 / -1; }
+.proj--dore .proj__artist {
+  /* l'italique déborde de sa boîte (« J » à gauche, « é » final ≈ 0,21 em à droite) : réserve intérieure, rien n'est rogné */
+  padding-inline: 0.1em 0.24em;
+  font: italic 300 clamp(3rem, 1.2rem + 7.6vw, 10rem) / 1.05 var(--font-display);
+  letter-spacing: -0.01em;
+}
+@media (max-width: 899px) { .proj--dore .proj__artist { font-size: min(18vw, 7rem); } }   /* « Julien Doré » occupe la largeur du mobile */
+/* titre du clip : capitales Anton (l'inverse d'Aya : artiste en italique, titre en grotesque) */
+.proj--dore .proj__work {
+  margin-top: 0.1em;
+  font: 400 clamp(2.2rem, 1rem + 4.6vw, 6rem) / var(--lh-display) var(--font-wide);
+  letter-spacing: 0.01em; text-transform: uppercase;
+  color: var(--rec);
+}
+.slot--dore-main { aspect-ratio: 16 / 9; margin-top: clamp(24px, 4vh, 48px); }
+.proj--dore .proj__text { margin-block: clamp(32px, 5vh, 56px); }
+.slot--dore-a { aspect-ratio: 1; }
+.slot--dore-b { aspect-ratio: 3 / 2; align-self: end; }
+
+@media (min-width: 900px) {
+  .proj--dore .proj__grid { grid-template-columns: repeat(12, minmax(0, 1fr)); row-gap: 0; }
+  .proj--dore .proj__head { grid-column: 5 / -1; grid-row: 1; text-align: right; }
+  .proj--dore .proj__title { align-items: flex-end; }
+  .slot--dore-main { grid-column: 1 / span 8; grid-row: 2; aspect-ratio: 4 / 3; margin-top: clamp(32px, 6vh, 72px); }
+  .proj--dore .proj__text { grid-column: 9 / -1; grid-row: 2; align-self: end; margin: 0 0 0 clamp(8px, 1.5vw, 24px); }
+  /* le carré remonte sur l'extrait : composition en collage, propre à cet univers */
+  .slot--dore-a { grid-column: 6 / span 3; grid-row: 3; margin-top: calc(-1 * clamp(80px, 9vw, 160px)); z-index: 1; box-shadow: 0 0 0 clamp(6px, 0.6vw, 10px) var(--surface); }
+  .slot--dore-b { grid-column: 9 / span 4; grid-row: 3; margin-top: clamp(48px, 7vw, 120px); }
+  .slot--dore-main .slot__osd .br { top: 0; bottom: auto; }   /* le carré en collage couvre le coin bas droit : timecode en haut */
+}
+
+/* ---------- Votre prochain projet ---------- */
+.prod-next { padding-block: clamp(120px, 20vh, 240px); }
+.prod-next__in {
+  display: flex; flex-direction: column; align-items: center; gap: clamp(20px, 3vh, 32px);
+  text-align: center;
+}
+.prod-next__t {
+  max-width: 14ch;
+  font: 400 clamp(3rem, 1.2rem + 6vw, 8rem) / var(--lh-display) var(--font-wide);
+  text-transform: uppercase; text-wrap: balance;
+}
+.prod-next__t em { font-style: normal; color: var(--rec); }
+.prod-next__p { max-width: 42ch; color: var(--cream-mute); font-size: clamp(1rem, 0.95rem + 0.25vw, 1.15rem); }
+.prod-next .btn { margin-top: clamp(12px, 2vh, 24px); }
+
+/* .btn--light : identique au bouton commun (contact.css) depuis le passage au fond noir */
+.btn:active { transform: translateY(1px); }
+
+.is-night .ftr { border-top: 1px solid rgb(246 241 232 / 0.08); }

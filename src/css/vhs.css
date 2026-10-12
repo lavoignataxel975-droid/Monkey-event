@@ -1,0 +1,209 @@
+/* ==========================================================================
+   Effets et composants VHS communs à toutes les pages (palette et polices : tokens.css)
+   Texture (scanlines, grain), tags « drop », décalage RGB au survol, OSD caméscope, bande de tracking.
+   ========================================================================== */
+::selection { background: var(--rec); color: var(--paper); }
+:focus-visible { outline-color: var(--rec); }
+
+/* ---------- Texture : scanlines (le grain argentique du site reste, body::after) ---------- */
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 89; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgb(0 0 0 / 0.22) 0 1px, transparent 1px 3px);
+  opacity: 0.25;
+}
+
+/* ---------- Tags « drop » ---------- */
+.vhs-tag {
+  display: inline-block; align-self: flex-start;
+  padding: 5px 8px 4px;
+  font: 600 0.68rem / 1 var(--font-mono); letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--rec); background: rgb(11 11 10 / 0.6);
+  border: 1px solid var(--rec);
+}
+
+/* ---------- Décalage RGB (titres) : au survol, puis recalage lent ---------- */
+.rgb { transition: text-shadow 0.45s var(--ease-out); }
+@media (hover: hover) {
+  .rgb:hover, .gate:hover .rgb { text-shadow: -3px 0 rgb(232 56 47 / 0.85), 3px 0 var(--cyan); }
+}
+
+/* ---------- Header ---------- */
+.hdr.is-solid, .hdr.is-open {
+  color: var(--paper); background: rgb(11 11 10 / 0.88); border-bottom-color: var(--line);
+}
+/* logo texte : « MONKEY » en Anton, « PRODUCTION » en mono, justifié sous le mot (header et footer) */
+.brand { display: inline-flex; flex-direction: column; align-items: stretch; gap: 3px; line-height: 1; }
+.brand__main { font: 400 clamp(1.35rem, 1.1rem + 0.6vw, 1.7rem) / 0.82 var(--font-wide); letter-spacing: 0.035em; text-transform: uppercase; }
+.brand__sub {
+  display: flex; justify-content: space-between;     /* lettres réparties sur la largeur de « MONKEY » */
+  font: 600 0.5rem / 1 var(--font-mono); text-transform: uppercase; color: var(--rec);
+}
+.hdr__brand { padding-block: 13px; letter-spacing: 0; }
+.ftr__brand .brand__main { font-size: 2.2rem; }
+.ftr__brand .brand__sub { font-size: 0.66rem; }
+.hdr__nav a { font: 500 0.72rem / 1 var(--font-mono); letter-spacing: 0.12em; }
+.hdr__nav a::after { background: var(--rec); height: 2px; }
+.menu { background: var(--tape); color: var(--paper); }
+.menu__nav a { font: 400 clamp(2.4rem, 1.6rem + 4vw, 3.6rem) / var(--lh-display) var(--font-wide); letter-spacing: 0.01em; }
+.menu__nav a[aria-current='page'] { color: var(--rec); }
+
+/* ---------- Hero vidéo commun (accueil, Production, Events, Conciergerie) ----------
+   Vidéo plein cadre + OSD caméscope + titre monumental, toujours entier : sa taille remplit la largeur utile
+   (--fit = largeur du texte en em, mesurée sur Anton) sans dépasser --cap (hauteur d'écran). */
+.hero__place, .hero__scroll, .vhs-hero .hero__foot { display: none; }
+.hero__media video { filter: saturate(0.92) contrast(1.06); }
+.hero__media.is-placeholder {                   /* vidéo illisible ou absente : fond bande vidéo */
+  background:
+    repeating-linear-gradient(0deg, rgb(242 239 232 / 0.035) 0 2px, transparent 2px 5px),
+    radial-gradient(90% 70% at 15% 90%, rgb(232 56 47 / 0.12), transparent 65%),
+    linear-gradient(160deg, var(--surface-2), var(--tape));
+}
+.hero__veil {
+  background: linear-gradient(180deg, rgb(11 11 10 / 0.55) 0%, rgb(11 11 10 / 0) 24%, rgb(11 11 10 / 0) 40%,
+    rgb(11 11 10 / 0.42) 68%, rgb(11 11 10 / 0.8) 100%);
+}
+.vhs-hero { flex-direction: column; align-items: stretch; }
+/* pages (Production, Events, Conciergerie) : écran d'introduction de toute la hauteur visible ;
+   dvh suit les barres du navigateur mobile (repli vh), sans hauteur minimale pour ne jamais dépasser l'écran */
+.hero--page { height: 100vh; height: 100dvh; min-height: 0; }
+.page > .vhs-hero:first-child { margin-top: calc(-1 * var(--header-h)); }   /* la vidéo passe sous le header */
+
+.osd {
+  position: relative; z-index: 1; flex: 1; pointer-events: none;
+  margin: calc(var(--header-h) + 14px) var(--gutter) clamp(14px, 2.4vh, 28px);
+  font: 500 clamp(0.72rem, 0.62rem + 0.3vw, 0.92rem) / 1.2 var(--font-mono);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--paper); text-shadow: 0 0 8px rgb(0 0 0 / 0.55), 0 1px 0 rgb(0 0 0 / 0.4);
+}
+.osd p { position: absolute; display: flex; flex-direction: column; gap: 6px; }
+.osd__tl { top: 0; left: 0; }
+.osd__tr { top: 0; right: 0; text-align: right; align-items: flex-end; }
+.osd__bl { bottom: 0; left: 0; }
+.osd__br { bottom: 0; right: 0; text-align: right; align-items: flex-end; }
+.osd__rec { display: inline-flex; align-items: center; gap: 8px; color: var(--paper); }
+.osd__rec i { width: 10px; height: 10px; border-radius: 50%; background: var(--rec); box-shadow: 0 0 10px rgb(232 56 47 / 0.6); }
+[data-osd-tc] { font-variant-numeric: tabular-nums; }
+
+.vhs-hero__mark {
+  position: relative; z-index: 2;
+  container-type: inline-size;                  /* 100cqi = largeur utile du titre */
+  display: flex; flex-direction: column; gap: clamp(8px, 1.4vh, 14px);
+  padding: 0 var(--gutter) max(clamp(16px, 3vh, 36px), env(safe-area-inset-bottom));
+}
+.vhs-hero__mark .vhs-tag { margin-left: 0.2vw; }
+.vhs-hero__t {
+  --fit: 4.5;                                   /* « PRODUCTION » ≈ 4,43 em + marge */
+  --cap: min(34svh, 300px);
+  margin-left: -0.02em;
+  font: 400 min(calc(100cqi / var(--fit)), var(--cap)) / 0.86 var(--font-wide);
+  letter-spacing: -0.005em; text-transform: uppercase; white-space: nowrap;
+  color: var(--paper);
+  filter: drop-shadow(0 2px 28px rgb(11 11 10 / 0.35));   /* lisible sur les zones claires de la vidéo */
+}
+.vhs-hero__t--events { --fit: 2.66; --cap: min(38svh, 340px); }
+.vhs-hero__t--conciergerie { --fit: 5.06; }
+.vhs-hero__l { display: inline-block; }
+/* accueil : « MONKEY PRODUCTION » sur une ligne en paysage, sur deux lignes en portrait (plus monumental) */
+.vhs-hero__t--home { --fit: 7.76; --cap: min(30svh, 232px); }
+@media (orientation: portrait) {
+  .vhs-hero__t--home { --fit: 4.5; --cap: 22svh; line-height: 0.92; }
+  .vhs-hero__t--home .vhs-hero__l { display: block; }
+}
+
+/* bande de tracking : un seul passage au chargement */
+.vhs-track {
+  position: absolute; left: 0; right: 0; top: 0; height: 14%; z-index: 1; pointer-events: none;
+  background: linear-gradient(180deg, transparent, rgb(242 239 232 / 0.07) 35%, rgb(242 239 232 / 0.16) 50%, rgb(242 239 232 / 0.05) 65%, transparent);
+  -webkit-backdrop-filter: blur(1.2px) saturate(1.5); backdrop-filter: blur(1.2px) saturate(1.5);
+  transform: translateY(-110%); opacity: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero__media video { animation: vhs-in 1.8s var(--ease-out) both; }
+  .vhs-track { animation: vhs-track 1.7s cubic-bezier(0.3, 0.1, 0.3, 1) 0.35s both; }
+  .vhs-hero__t { animation: vhs-split 1.6s var(--ease-out) 0.5s both; }
+  .vhs-hero__mark .vhs-tag, .osd p { animation: rise 1.2s var(--ease-out) 0.9s both; }
+  .osd__rec i { animation: rec-blink 1.4s steps(1) infinite; }
+}
+@keyframes vhs-in {
+  0% { opacity: 0.3; transform: scale(1.04) translateX(-1.2%) skewX(1.5deg); filter: saturate(1.8) contrast(1.3); }
+  12% { transform: scale(1.04) translateX(0.8%); }
+  18% { transform: scale(1.03); }
+  100% { opacity: 1; transform: none; filter: saturate(0.92) contrast(1.06); }
+}
+@keyframes vhs-track { 0% { opacity: 1; transform: translateY(-110%); } 85% { opacity: 1; } 100% { opacity: 0; transform: translateY(760%); } }
+@keyframes vhs-split {
+  0% { opacity: 0; transform: translateY(16%); text-shadow: -14px 0 rgb(232 56 47 / 0.9), 14px 0 rgb(0 214 255 / 0.7); }
+  40% { opacity: 1; }
+  100% { transform: none; text-shadow: 0 0 transparent, 0 0 transparent; }
+}
+@keyframes rec-blink { 50% { opacity: 0; } }
+
+/* ---------- Portes : tags drop, titres Anton, invitation en mono ---------- */
+.gates { background: var(--tape); }
+.gate__label {
+  font: 400 min(clamp(3rem, 1.4rem + 6vw, 9rem), 14cqi) / var(--lh-display) var(--font-wide);
+  letter-spacing: 0.005em;
+}
+.gate__cta { font: 500 0.76rem / 1 var(--font-mono); letter-spacing: 0.14em; text-transform: uppercase; padding-bottom: 8px; }
+.gate__cta::after { background: var(--rec); height: 2px; }
+.gate__frame { border-color: rgb(242 239 232 / 0.4); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .gate:hover .gate__media img, .gate:hover .gate__media.is-placeholder { animation: vhs-jolt 0.5s steps(4) 1; }
+}
+@keyframes vhs-jolt { 0% { transform: translateX(0); } 25% { transform: translateX(-6px) skewX(-1deg); } 50% { transform: translateX(4px); } 75% { transform: translateX(-2px); } 100% { transform: none; } }
+
+/* ---------- Partenaires, footer ---------- */
+.partners__t { font: 400 clamp(3rem, 1.6rem + 6vw, 8rem) / var(--lh-display) var(--font-wide); text-transform: uppercase; letter-spacing: 0.005em; }
+.partner--empty { border-color: rgb(242 239 232 / 0.16); }
+.partner--empty span { font-family: var(--font-mono); color: var(--cassette); }
+.ftr { border-top: 1px solid var(--line); }
+
+.ftr__nav a { font-family: var(--font-mono); }
+
+/* ---------- OSD des pages : bande « REC » sous le header, coins des vidéos ---------- */
+.osd-strip {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 6px 22px;
+  font: 500 var(--fs-xs) / 1.2 var(--font-mono); letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--cassette);
+}
+.osd-strip .osd__rec { color: var(--paper); }
+.osd-strip [data-osd-tc] { color: var(--paper); font-variant-numeric: tabular-nums; }
+.slot__osd {
+  position: absolute; inset: clamp(12px, 1.6vw, 24px); z-index: 1; pointer-events: none;
+  font: 500 clamp(0.62rem, 0.56rem + 0.2vw, 0.78rem) / 1.2 var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--paper); text-shadow: 0 0 8px rgb(0 0 0 / 0.6);
+}
+.slot__osd > * { position: absolute; display: inline-flex; align-items: center; gap: 8px; }
+.slot__osd .tl { top: 0; left: 0; } .slot__osd .bl { bottom: 0; left: 0; } .slot__osd .br { bottom: 0; right: 0; }
+.slot__osd [data-osd-tc] { font-variant-numeric: tabular-nums; }
+.slot.is-placeholder::after { top: auto; bottom: clamp(36px, 4vw, 56px); }   /* libellé « … à venir » sous le coin REC */
+@media (prefers-reduced-motion: no-preference) { .osd-strip .osd__rec i, .slot__osd .osd__rec i { animation: rec-blink 1.4s steps(1) infinite; } }
+
+/* écran cathodique : vignettes vidéo 4:3 */
+.slot--crt { border-radius: 16px; box-shadow: inset 0 0 70px rgb(0 0 0 / 0.65), 0 0 0 1px var(--line); }
+
+/* bande de tracking à l'arrivée sur une page (js/vhs.js) */
+.page-track {
+  position: fixed; left: 0; right: 0; top: 0; height: 18vh; z-index: 88; pointer-events: none;
+  background: linear-gradient(180deg, transparent, rgb(242 239 232 / 0.05) 35%, rgb(242 239 232 / 0.11) 50%, rgb(242 239 232 / 0.04) 65%, transparent);
+  -webkit-backdrop-filter: blur(1px) saturate(1.4); backdrop-filter: blur(1px) saturate(1.4);
+  animation: vhs-track 1.4s cubic-bezier(0.3, 0.1, 0.3, 1) both;
+}
+
+/* décalage RGB au survol : tous les grands titres */
+@media (hover: hover) {
+  .page__t:hover, .proj__artist:hover, .aya-statement:hover, .prod-next__t:hover, .cg-hero__t:hover,
+  .cg-role__t:hover, .cg-services__t:hover, .cg-next__t:hover, .partners__t:hover, .dest__fig:hover .dest__name,
+  .cg-item:hover .cg-item__t, .brand:hover .brand__main {
+    text-shadow: -3px 0 rgb(232 56 47 / 0.85), 3px 0 var(--cyan);
+  }
+  .page__t, .proj__artist, .aya-statement, .prod-next__t, .cg-hero__t, .cg-role__t, .cg-services__t, .cg-next__t,
+  .partners__t, .dest__name, .cg-item__t, .brand__main { transition: text-shadow 0.45s var(--ease-out); }
+}
+
+/* ---------- Animations réduites : ni grain, ni scanlines, ni glitch ---------- */
+@media (prefers-reduced-motion: reduce) {
+  body::before, body::after { display: none; }        /* ni scanlines ni grain */
+  .vhs-track, .page-track { display: none; }
+}

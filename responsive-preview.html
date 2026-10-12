@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Monkey Production · Prévisualisation responsive</title>
+  <link rel="icon" href="data:,">
+  <script type="module" src="/src/preview/preview.js"></script>
+</head>
+<!-- Outil interne de test, servi uniquement par le serveur de développement (vite.config.js → devOnly) :
+     absent du build de production, jamais lié depuis le site. -->
+<body class="pv">
+  <header class="pv-bar">
+    <p class="pv-bar__brand"><span>Monkey Production</span> Prévisualisation responsive</p>
+
+    <nav class="pv-pages" aria-label="Ouvrir une page dans les deux appareils">
+      <button type="button" data-goto="/" aria-pressed="true">Accueil</button>
+      <button type="button" data-goto="/production">Production</button>
+      <button type="button" data-goto="/evenements">Events</button>
+      <button type="button" data-goto="/conciergerie">Conciergerie</button>
+      <button type="button" data-goto="/contact">Contact</button>
+    </nav>
+
+    <div class="pv-tools">
+      <div class="pv-seg" role="group" aria-label="Orientation de l'iPad">
+        <button type="button" data-orient="auto" aria-pressed="true">Auto</button>
+        <button type="button" data-orient="portrait" aria-pressed="false">Portrait</button>
+        <button type="button" data-orient="landscape" aria-pressed="false">Paysage</button>
+      </div>
+      <button type="button" class="pv-btn" data-frames aria-pressed="true">Cadres</button>
+      <button type="button" class="pv-btn pv-btn--main" data-reload-all>Actualiser</button>
+    </div>
+  </header>
+
+  <main class="pv-stage" data-stage>
+    <!-- iPhone 16 : viewport 393 × 852 -->
+    <section class="pv-dev" data-dev="phone" aria-label="iPhone 16">
+      <div class="pv-meta">
+        <p><strong>iPhone 16</strong> <span data-size>393 × 852</span> <span class="pv-meta__scale" data-scale></span></p>
+        <p class="pv-meta__path" data-path>/</p>
+        <button type="button" class="pv-btn pv-btn--small" data-top>Haut de page</button>
+      </div>
+      <div class="pv-box" data-box>
+        <div class="device device--phone" data-device>
+          <span class="device__btn device__btn--action" aria-hidden="true"></span>
+          <span class="device__btn device__btn--up" aria-hidden="true"></span>
+          <span class="device__btn device__btn--down" aria-hidden="true"></span>
+          <span class="device__btn device__btn--power" aria-hidden="true"></span>
+          <div class="device__screen">
+            <!-- barre d'état au-dessus de la page, comme sur l'appareil : le viewport reste 393 × 852 -->
+            <div class="device__status" aria-hidden="true"><span>9:41</span><span class="device__island"></span><span class="device__battery"></span></div>
+            <iframe src="/" title="Monkey Production sur iPhone 16 (393 × 852)" width="393" height="852" data-view></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- iPad (Air 11") : viewport 820 × 1180 en portrait, 1180 × 820 en paysage -->
+    <section class="pv-dev" data-dev="tablet" aria-label="iPad">
+      <div class="pv-meta">
+        <p><strong>iPad</strong> <span data-size>820 × 1180</span> <span class="pv-meta__scale" data-scale></span></p>
+        <p class="pv-meta__path" data-path>/</p>
+        <button type="button" class="pv-btn pv-btn--small" data-top>Haut de page</button>
+      </div>
+      <div class="pv-box" data-box>
+        <div class="device device--tablet" data-device>
+          <span class="device__cam" aria-hidden="true"></span>
+          <div class="device__screen">
+            <div class="device__status" aria-hidden="true"><span>9:41</span><span class="device__battery"></span></div>
+            <iframe src="/" title="Monkey Production sur iPad" width="820" height="1180" data-view></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

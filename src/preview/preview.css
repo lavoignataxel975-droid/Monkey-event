@@ -1,0 +1,132 @@
+/* Prévisualisation responsive (outil local) : deux iframes du vrai site, viewports fixes, mises à l'échelle pour tenir à l'écran. */
+:root {
+  --pv-bg: #0f0e0d;
+  --pv-panel: #1a1917;
+  --pv-line: rgb(246 241 232 / 0.1);
+  --pv-text: #f6f1e8;
+  --pv-mute: rgb(246 241 232 / 0.6);
+  --pv-accent: #8b9a7f;
+  --pv-font: 'Archivo Variable', system-ui, -apple-system, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body.pv {
+  display: flex; flex-direction: column;
+  background: radial-gradient(120% 80% at 50% 0%, #1c1b18, var(--pv-bg) 70%) fixed;
+  color: var(--pv-text); font: 400 14px / 1.4 var(--pv-font);
+  -webkit-font-smoothing: antialiased;
+}
+button { font: inherit; color: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--pv-accent); outline-offset: 2px; }
+
+/* ---------- Barre de commandes ---------- */
+.pv-bar {
+  position: sticky; top: 0; z-index: 2;
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 24px;
+  padding: 12px 20px;
+  background: rgb(15 14 13 / 0.92); border-bottom: 1px solid var(--pv-line);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+}
+.pv-bar__brand { margin: 0; color: var(--pv-mute); white-space: nowrap; }
+.pv-bar__brand span {
+  margin-right: 8px; color: var(--pv-text);
+  font-weight: 600; font-stretch: 125%; letter-spacing: 0.16em; text-transform: uppercase; font-size: 12px;
+}
+.pv-pages, .pv-tools { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.pv-tools { margin-left: auto; gap: 10px; }
+
+.pv-pages button, .pv-seg button, .pv-btn {
+  min-height: 34px; padding: 0 14px;
+  background: transparent; border: 1px solid var(--pv-line); border-radius: 999px;
+  color: var(--pv-mute); white-space: nowrap;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+}
+.pv-pages button:hover, .pv-seg button:hover, .pv-btn:hover { color: var(--pv-text); border-color: rgb(246 241 232 / 0.3); }
+.pv-pages [aria-pressed='true'], .pv-seg [aria-pressed='true'], .pv-btn[data-frames][aria-pressed='true'] {
+  color: var(--pv-bg); background: var(--pv-text); border-color: var(--pv-text);
+}
+.pv-seg { display: inline-flex; gap: 0; }
+.pv-seg button { border-radius: 0; margin-left: -1px; }
+.pv-seg button:first-child { border-radius: 999px 0 0 999px; margin-left: 0; }
+.pv-seg button:last-child { border-radius: 0 999px 999px 0; }
+.pv-btn--main { color: var(--pv-text); border-color: var(--pv-accent); }
+.pv-btn--small { min-height: 28px; padding: 0 12px; font-size: 12px; }
+
+/* ---------- Scène ---------- */
+.pv-stage {
+  flex: 1; min-height: 0;
+  display: flex; justify-content: center; align-items: flex-start; gap: 40px;
+  padding: 20px 24px 24px;
+}
+.pv-stage.is-stacked { flex-direction: column; align-items: center; gap: 48px; }
+.pv-dev { display: flex; flex-direction: column; align-items: center; gap: 12px; min-width: 0; }
+.pv-meta {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px 14px;
+  max-width: 100%; color: var(--pv-mute); font-size: 12px;
+}
+.pv-meta p { margin: 0; }
+.pv-meta strong { color: var(--pv-text); font-weight: 600; }
+.pv-meta [data-size] { font-variant-numeric: tabular-nums; }
+.pv-meta__scale { opacity: 0.7; }
+.pv-meta__path {
+  max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  padding: 3px 10px; border-radius: 999px; background: var(--pv-panel);
+  font-family: ui-monospace, 'SF Mono', Menlo, monospace; font-size: 11px;
+}
+
+/* boîte à la taille mise à l'échelle ; l'appareil garde ses dimensions réelles et est réduit par transform */
+.pv-box { position: relative; flex: none; }
+.device { position: absolute; top: 0; left: 0; transform-origin: 0 0; }
+.device__screen { position: relative; overflow: hidden; background: #000; }
+.device__screen iframe { display: block; border: 0; background: #fff; }
+
+/* iPhone 16 : 393 × 852 + bordure 12 px */
+.device--phone {
+  padding: 12px; border-radius: 62px;
+  background: linear-gradient(145deg, #3a3936, #1b1a19 40%, #2a2927);
+  box-shadow: inset 0 0 0 1.5px #55534f, inset 0 0 0 3px #111, 0 40px 80px -30px rgb(0 0 0 / 0.8);
+}
+.device--phone .device__screen { border-radius: 50px; }
+/* barre d'état : hors du viewport simulé (au-dessus de l'iframe) */
+.device__status {
+  position: relative; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 34px; background: #000; color: #fff;
+  font: 600 15px / 1 -apple-system, 'SF Pro Text', system-ui, sans-serif;
+}
+.device--phone .device__status { height: 54px; padding-top: 4px; }
+.device--tablet .device__status { height: 24px; padding: 0 22px; font-size: 12px; }
+.device__island {
+  position: absolute; top: 11px; left: 50%; transform: translateX(-50%);
+  width: 124px; height: 36px; border-radius: 20px; background: #111;
+}
+.device__battery { width: 25px; height: 12px; border-radius: 4px; border: 1.5px solid rgb(255 255 255 / 0.5); background: linear-gradient(90deg, #fff 80%, transparent 80%) content-box; padding: 1.5px; }
+.device--tablet .device__battery { width: 22px; height: 11px; }
+.device__btn { position: absolute; width: 4px; border-radius: 2px; background: #2c2b29; }
+.device__btn--action { left: -3px; top: 130px; height: 32px; }
+.device__btn--up { left: -3px; top: 190px; height: 62px; }
+.device__btn--down { left: -3px; top: 266px; height: 62px; }
+.device__btn--power { right: -3px; top: 220px; height: 100px; }
+
+/* iPad : 820 × 1180 (ou 1180 × 820) + bordure 20 px */
+.device--tablet {
+  padding: 20px; border-radius: 40px;
+  background: linear-gradient(145deg, #2f2e2c, #181716 50%, #262523);
+  box-shadow: inset 0 0 0 1.5px #4d4b47, 0 40px 80px -30px rgb(0 0 0 / 0.8);
+}
+.device--tablet .device__screen { border-radius: 20px; }
+.device__cam {
+  position: absolute; top: 8px; left: 50%; width: 6px; height: 6px; margin-left: -3px;
+  border-radius: 50%; background: #0b0b0b; box-shadow: inset 0 0 0 1px #333;
+}
+.is-landscape .device__cam { top: 50%; left: 8px; margin: -3px 0 0; }
+
+/* cadres masqués : écran seul, filet discret */
+.no-frames .device { padding: 0; border-radius: 0; background: none; box-shadow: 0 0 0 1px var(--pv-line), 0 30px 60px -30px rgb(0 0 0 / 0.8); }
+.no-frames .device__screen { border-radius: 0; }
+.no-frames .device__status, .no-frames .device__btn, .no-frames .device__cam { display: none; }
+
+@media (max-width: 720px) {
+  .pv-bar { padding: 10px 14px; gap: 8px 12px; }
+  .pv-tools { margin-left: 0; }
+  .pv-stage { padding: 16px 12px 24px; }
+}

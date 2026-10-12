@@ -2,11 +2,10 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <!-- @include head -->
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title data-i18n="home.meta.title">Monkey Events · Événements et séjours d’exception</title>
-  <meta name="description" content="Monkey Events organise des événements et des séjours d’exception." data-i18n-attr="content:home.meta.desc">
-  <meta name="theme-color" content="#1c1a17">
+  <title>Monkey Production · Clips, événements et conciergerie</title>
+  <meta name="description" content="Monkey Production : production de clips musicaux, événements et conciergerie de luxe.">
+  <meta name="theme-color" content="#0b0b0a">
   <link rel="icon" href="data:,">
   <!-- vidéo du hero : préchargement de l'image d'aperçu (src/site.config.js → hero.poster) -->
   <link rel="preload" as="image" href="/media/hero/monkey-events-hero-poster.jpg" fetchpriority="high">
@@ -16,37 +15,68 @@
 
   <main id="contenu" tabindex="-1">
     <!-- ============ Hero : vidéo plein écran (source : src/site.config.js → hero) ============ -->
-    <section class="hero" aria-label="Monkey Events">
+    <section class="hero vhs-hero" aria-label="Monkey Production">
       <div class="hero__media" data-hero-video>
         <video muted loop playsinline disablepictureinpicture disableremoteplayback preload="none" aria-hidden="true" tabindex="-1"></video>
       </div>
       <div class="hero__veil" aria-hidden="true"></div>
-      <h1 class="sr-only" data-i18n="home.h1">Monkey Events, événements et séjours d’exception</h1>
+      <span class="vhs-track" aria-hidden="true"></span>
+
+      <!-- affichage caméscope (OSD) : date, heure et timecode réels (src/js/vhs.js) -->
+      <div class="osd" aria-hidden="true">
+        <p class="osd__tl"><span class="osd__rec"><i></i>REC</span><span>SP</span></p>
+        <p class="osd__tr"><span data-osd-date>OCT.11 2026</span><span data-osd-time>PM 9:41</span></p>
+        <p class="osd__bl"><span>PLAY ▶</span><span data-osd-tc>00:00:00:00</span></p>
+        <p class="osd__br"><span>LOC. IBIZA</span><span>CH 03</span></p>
+      </div>
+
+      <div class="vhs-hero__mark">
+        <p class="vhs-tag">VOL. 01</p>
+        <h1 class="vhs-hero__t vhs-hero__t--home rgb"><span class="vhs-hero__l">Monkey</span> <span class="vhs-hero__l">Production</span></h1>
+      </div>
       <div class="hero__foot wrap">
         <a class="hero__scroll" href="#univers">
-          <span class="hero__scroll-ico" aria-hidden="true">{{icon:arrow-down}}</span>
-          <span class="sr-only" data-i18n="home.scroll">Faire défiler vers la suite</span>
+          <span class="hero__scroll-ico" aria-hidden="true">
+            <svg viewBox="0 0 16 24" width="16" height="24"><path d="M8 1v21M2 16l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+          </span>
+          <span class="sr-only">Faire défiler vers la suite</span>
         </a>
         <p class="hero__place" lang="es">Ibiza</p>
       </div>
     </section>
 
-    <!-- ============ Deux portes : Événements / Contact (images : src/site.config.js → blocks) ============ -->
-    <section class="gates" id="univers" aria-label="Événements et contact" data-i18n-attr="aria-label:home.gates">
-      <a class="gate gate--evenements" href="/evenements" data-reveal>
-        <span class="gate__media" data-block-media="evenements" aria-hidden="true"></span>
+    <!-- ============ Trois portes : Production (activité principale) / Events / Conciergerie (images : src/site.config.js → blocks)
+         Ordinateur : Production en grand à gauche, Events et Conciergerie superposées à droite.
+         Tablette : Production sur toute la largeur, les deux autres côte à côte. Mobile : les trois empilées. -->
+    <section class="gates" id="univers" aria-label="Nos activités">
+      <a class="gate gate--production" id="production" href="/production" data-reveal>
+        <span class="gate__media" data-block-media="production" data-sizes="(min-width: 1024px) 58vw, 100vw" aria-hidden="true"></span>
         <span class="gate__veil" aria-hidden="true"></span>
+        <span class="gate__frame" aria-hidden="true"></span>
         <span class="gate__body">
-          <span class="gate__label" data-i18n="home.gate.events">Événements</span>
-          <span class="gate__cta"><span data-i18n="home.gate.events.cta">Découvrir</span> <span class="gate__arrow" aria-hidden="true">{{icon:arrow-right}}</span></span>
+          <span class="vhs-tag">DROP 01</span>
+          <span class="gate__label rgb">Production</span>
+          <span class="gate__cta">Découvrir <span class="gate__arrow" aria-hidden="true">→</span></span>
         </span>
       </a>
-      <a class="gate gate--contact" href="/contact" data-reveal>
-        <span class="gate__media" data-block-media="contact" aria-hidden="true"></span>
+      <a class="gate gate--events" id="events" href="/evenements" data-reveal>
+        <span class="gate__media" data-block-media="events" data-sizes="(min-width: 1024px) 42vw, (min-width: 720px) 50vw, 100vw" aria-hidden="true"></span>
         <span class="gate__veil" aria-hidden="true"></span>
+        <span class="gate__frame" aria-hidden="true"></span>
         <span class="gate__body">
-          <span class="gate__label" data-i18n="home.gate.contact">Contact</span>
-          <span class="gate__cta"><span data-i18n="home.gate.contact.cta">Nous contacter</span> <span class="gate__arrow" aria-hidden="true">{{icon:arrow-right}}</span></span>
+          <span class="vhs-tag">DROP 02</span>
+          <span class="gate__label rgb" lang="en">Events</span>
+          <span class="gate__cta">Découvrir <span class="gate__arrow" aria-hidden="true">→</span></span>
+        </span>
+      </a>
+      <a class="gate gate--conciergerie" id="conciergerie" href="/conciergerie" data-reveal>
+        <span class="gate__media" data-block-media="conciergerie" data-sizes="(min-width: 1024px) 42vw, (min-width: 720px) 50vw, 100vw" aria-hidden="true"></span>
+        <span class="gate__veil" aria-hidden="true"></span>
+        <span class="gate__frame" aria-hidden="true"></span>
+        <span class="gate__body">
+          <span class="vhs-tag">DROP 03</span>
+          <span class="gate__label rgb">Conciergerie</span>
+          <span class="gate__cta">Découvrir <span class="gate__arrow" aria-hidden="true">→</span></span>
         </span>
       </a>
     </section>
@@ -54,7 +84,7 @@
     <!-- ============ Partenaires (logos : src/site.config.js → partners) ============ -->
     <section class="partners" aria-labelledby="partners-t">
       <div class="wrap">
-        <h2 class="partners__t" id="partners-t" data-reveal data-i18n="home.partners">Partenaires</h2>
+        <h2 class="partners__t" id="partners-t" data-reveal>Partenaires</h2>
         <ul class="partners__list" data-partners data-reveal></ul>
       </div>
     </section>

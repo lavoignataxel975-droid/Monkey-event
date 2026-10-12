@@ -1,32 +1,34 @@
-<a class="skip" href="#contenu" data-i18n="skip">Aller au contenu</a>
+<a class="skip" href="#contenu">Aller au contenu</a>
 <header class="hdr" data-header>
   <div class="hdr__in">
-    <!-- sélecteur de langue (src/js/lang-switch.js) -->
-    <div class="lang" role="group" aria-label="Langue du site" data-i18n-attr="aria-label:lang.label" data-lang-switch>
-      <span class="lang__thumb" aria-hidden="true"></span>
-      <button class="lang__opt" type="button" data-lang="fr" lang="fr" aria-pressed="true" aria-label="Français" data-i18n-attr="aria-label:lang.fr">FR</button>
-      <button class="lang__opt" type="button" data-lang="en" lang="en" aria-pressed="false" aria-label="Anglais" data-i18n-attr="aria-label:lang.en">EN</button>
-    </div>
-    <a class="hdr__brand" href="/" aria-label="Monkey Events, accueil" data-i18n-attr="aria-label:brand.home">Monkey Events</a>
-    <nav class="hdr__nav" aria-label="Navigation principale" data-i18n-attr="aria-label:nav.main">
+    <a class="hdr__brand brand" href="/" aria-label="Monkey Production, accueil">
+      <span class="brand__main" aria-hidden="true">Monkey</span>
+      <span class="brand__sub" aria-hidden="true"><span>P</span><span>R</span><span>O</span><span>D</span><span>U</span><span>C</span><span>T</span><span>I</span><span>O</span><span>N</span></span>
+    </a>
+    <!-- ordre : Accueil · Production (activité principale) · Events · Conciergerie · Contact (même ordre dans le menu et le footer) -->
+    <nav class="hdr__nav" aria-label="Navigation principale">
       <ul>
-        <li><a href="/" data-nav="accueil" data-i18n="nav.home">Accueil</a></li>
-        <li><a href="/evenements" data-nav="evenements" data-i18n="nav.events">Événements</a></li>
-        <li><a href="/contact" data-nav="contact" data-i18n="nav.contact">Contact</a></li>
+        <li><a href="/" data-nav="accueil">Accueil</a></li>
+        <li><a href="/production" data-nav="production">Production</a></li>
+        <li><a href="/evenements" data-nav="evenements" lang="en">Events</a></li>
+        <li><a href="/conciergerie" data-nav="conciergerie">Conciergerie</a></li>
+        <li><a href="/contact" data-nav="contact">Contact</a></li>
       </ul>
     </nav>
     <button class="hdr__toggle" type="button" aria-expanded="false" aria-controls="menu" data-menu-toggle>
-      <span class="sr-only" data-menu-label data-i18n="menu.open">Ouvrir le menu</span>
+      <span class="sr-only" data-menu-label>Ouvrir le menu</span>
       <span class="hdr__bars" aria-hidden="true"></span>
     </button>
   </div>
 </header>
 <div class="menu" id="menu" data-menu hidden>
-  <nav class="menu__nav" aria-label="Menu" data-i18n-attr="aria-label:nav.menu">
+  <nav class="menu__nav" aria-label="Menu">
     <ul>
-      <li><a href="/" data-nav="accueil" data-i18n="nav.home">Accueil</a></li>
-      <li><a href="/evenements" data-nav="evenements" data-i18n="nav.events">Événements</a></li>
-      <li><a href="/contact" data-nav="contact" data-i18n="nav.contact">Contact</a></li>
+      <li><a href="/" data-nav="accueil">Accueil</a></li>
+      <li><a href="/production" data-nav="production">Production</a></li>
+      <li><a href="/evenements" data-nav="evenements" lang="en">Events</a></li>
+      <li><a href="/conciergerie" data-nav="conciergerie">Conciergerie</a></li>
+      <li><a href="/contact" data-nav="contact">Contact</a></li>
     </ul>
   </nav>
 </div>

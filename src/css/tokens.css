@@ -1,32 +1,36 @@
-/* Monkey Events V2 : beige, noir doux, et une gamme de vert sauge assumée (contrastes WCAG AA vérifiés) */
+/* Monkey Production : palette, typographie, rythme (source unique pour tout le site)
+   Direction « VHS 2000s × Streetwear × Luxe moderne » : base noire épurée et lisible ;
+   le VHS est une texture (grain, scanlines) et un accent (OSD caméscope, décalage RGB). */
 :root {
-  /* Beige (base lumineuse) */
-  --beige: #eee8dc;
-  --beige-2: #e6dfd1;
-  /* Noir doux, légèrement vert pour s'accorder à la sauge */
-  --ink: #1b1e1a;
-  --ink-mute: #55594f;           /* sur beige : 5,9:1 */
-  --line: rgb(27 30 26 / 0.14);
+  /* Palette */
+  --tape: #0b0b0a;               /* noir bande : fond dominant */
+  --paper: #f2efe8;              /* off-white : texte (17,8:1 sur --tape) */
+  --cassette: #8c8982;           /* gris cassette : texte secondaire (5,6:1 sur --tape) */
+  --surface: #171615;            /* blocs, cadres vidéo */
+  --surface-2: #211f1d;
+  --rec: #e8382f;                /* accent unique, rouge REC (4,7:1 sur --tape) */
+  --cyan: rgb(0 214 255 / 0.65); /* uniquement dans le décalage RGB */
+  --line: rgb(242 239 232 / 0.12);
 
-  /* Vert sauge : du plus clair au plus profond */
-  --sage-50: #e3e8da;            /* fond de section clair */
-  --sage-100: #d3dac8;
-  --sage-300: #aab79c;           /* sur sauge 800 : 5,9:1 */
-  --sage: #8c9b7e;               /* teinte de référence */
-  --sage-600: #56664b;           /* texte d'accent sur beige : 5,1:1 */
-  --sage-700: #46543e;
-  --sage-800: #2c3828;           /* fonds profonds (bloc Contact, menu) */
-  --sage-900: #212a1e;           /* pied de page */
+  /* Anciens noms, conservés pour les feuilles existantes : tous pointent vers la palette ci-dessus */
+  --beige: var(--tape); --beige-2: var(--surface); --beige-3: var(--surface-2);
+  --ink: var(--paper); --ink-2: var(--surface-2); --ink-mute: var(--cassette);
+  --night: var(--tape);
+  --sage: var(--rec); --sage-deep: var(--rec);
+  --cream: var(--paper); --cream-mute: rgb(242 239 232 / 0.72);
+  --error: #ff7a6e;              /* erreurs de formulaire (7,4:1 sur --tape) */
 
-  /* Clair sur fonds sombres et images */
-  --cream: #f4efe5;
-  --cream-mute: rgb(244 239 229 / 0.74);
+  /* Typographies */
+  --font-wide: 'Anton', 'Impact', 'Arial Narrow', sans-serif;          /* titres : condensée, capitales */
+  --wide: normal;                                                     /* (ancienne largeur Archivo, sans effet sur Anton) */
+  --font-text: 'Archivo Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;       /* OSD caméscope, tags, libellés */
+  --font-display: 'Cormorant Variable', 'Cormorant Garamond', Georgia, serif;   /* accent luxe : accroches */
 
-  --error: #8f3a2b;              /* sur beige : 6,1:1 */
-
-  /* Geist (licence OFL) pour tout le site : titres en graisse fine et approche resserrée, textes en 400 */
-  --font-display: 'Geist Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-text: 'Geist Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  /* Interlignage des titres Anton sur plusieurs lignes : capitales 0,86 em, capitales accentuées (É È À) 1,10 em,
+     queue du Q 0,09 em → 1,16 laisse ≈ 0,06 em entre un accent et la ligne du dessus. En dessous, les accents se chevauchent.
+     Les titres forcés sur une ligne (white-space: nowrap) peuvent rester plus serrés. */
+  --lh-display: 1.16;
 
   --fs-xs: 0.75rem;
   --fs-sm: 0.875rem;
@@ -35,13 +39,14 @@
   --track-wide: 0.32em;
   --gutter: clamp(16px, 3.2vw, 48px);
   --header-h: 64px;
-  --radius: 0;                   /* angles droits partout */
+  --radius: 2px;
 
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --t-fast: 0.25s;
   --t-slow: 1.1s;
+  color-scheme: dark;
 }
 @media (min-width: 1024px) {
-  :root { --header-h: 72px; }
+  :root { --header-h: 76px; }
 }

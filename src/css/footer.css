@@ -1,43 +1,39 @@
-/* ---------- Footer : sauge profond ---------- */
-.ftr { background: var(--sage-900); color: var(--cream); overflow: hidden; container-type: inline-size; }
+/* ---------- Footer ---------- */
+.ftr { background: var(--night); color: var(--cream); }
 .ftr__main {
   display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center;
   gap: 28px 48px;
-  padding-block: clamp(56px, 9vh, 104px) clamp(28px, 4vh, 48px);
+  padding-block: clamp(48px, 8vh, 88px);
 }
-.ftr__brand { display: inline-flex; align-items: center; gap: 16px; }
+.ftr__brand { display: inline-flex; align-items: center; gap: 16px; min-height: 44px; }
 .ftr__logo img { height: 40px; width: auto; }
 .ftr__name {
-  font: 500 0.95rem / 1 var(--font-display);
-  letter-spacing: var(--track-wide); text-transform: uppercase;
+  font: 600 1rem / 1 var(--font-wide);
+  font-stretch: var(--wide);
+  letter-spacing: 0.18em; text-transform: uppercase;
 }
 .ftr__nav ul { display: flex; flex-wrap: wrap; gap: 8px clamp(24px, 3vw, 44px); }
+/* mobile : cinq liens sur deux colonnes alignées plutôt qu'un retour à la ligne irrégulier */
+@media (max-width: 599px) {
+  .ftr__nav { width: 100%; }
+  .ftr__nav ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 24px; }
+}
 .ftr__nav a {
-  position: relative; display: block; padding-block: 10px;
-  font-size: 0.75rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase;
+  display: block; padding-block: 14px;   /* 44 px de haut */
+  font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
   transition: color var(--t-fast) var(--ease);
 }
-.ftr__nav a[aria-current='page'] { color: var(--sage-300); }
-
-/* grand nom de marque : sauge sur sauge, en bas de page */
-.ftr__mark {
-  max-width: none;
-  font: italic 300 15.4cqi / 1.08 var(--font-display);        /* occupe la largeur du pied de page, marges comprises */
-  letter-spacing: -0.06em; white-space: nowrap;
-  color: var(--sage-700);
-  padding-bottom: 0.2em;                                      /* place pour le jambage du « y » */
-  user-select: none;
-}
+.ftr__nav a[aria-current='page'] { color: var(--sage); }
 
 .ftr__legal {
   display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 24px;
-  padding-block: 20px max(20px, env(safe-area-inset-bottom));
-  border-top: 1px solid rgb(170 183 156 / 0.22);
+  padding-block: 8px max(8px, env(safe-area-inset-bottom));
+  border-top: 1px solid rgb(246 241 232 / 0.12);
   font-size: var(--fs-xs); letter-spacing: 0.04em; color: var(--cream-mute);
 }
-.ftr__legal a { display: inline-block; padding-block: 6px; transition: color var(--t-fast) var(--ease); }
+.ftr__legal a { display: inline-block; padding-block: 13px; transition: color var(--t-fast) var(--ease); }
 
 @media (hover: hover) {
-  .ftr__nav a:hover, .ftr__legal a:hover { color: var(--sage-300); }
+  .ftr__nav a:hover, .ftr__legal a:hover { color: var(--sage); }
 }
-.ftr :focus-visible { outline-color: var(--sage-300); }
+.ftr :focus-visible { outline-color: var(--sage); }

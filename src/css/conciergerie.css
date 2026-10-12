@@ -1,0 +1,127 @@
+/* ==========================================================================
+   Conciergerie : hero vidéo (vhs.css) · introduction (texte + grande photo) · rôle de la conciergerie · exemples de demandes · invitation
+   Pendant lumineux de la page Production : fond beige, voix luxe (Cormorant) en vedette,
+   grotesque large en accent (nom de la page, titres des demandes).
+   Emplacements photo : .slot (production.css, src/js/slots.js), ici en version claire.
+   ========================================================================== */
+
+/* ---------- Emplacements photo, version claire ---------- */
+.concierge .slot { background: var(--beige-2); }
+.concierge .slot.is-placeholder {
+  background:
+    radial-gradient(90% 80% at 85% 0%, rgb(232 56 47 / 0.1), transparent 62%),
+    linear-gradient(165deg, var(--surface-2), var(--surface) 85%);
+  box-shadow: inset 0 0 0 1px var(--line);
+}
+.concierge .slot.is-placeholder::after { color: rgb(242 239 232 / 0.45); }
+.concierge .cg-item--access .slot.is-placeholder,
+.concierge .slot--cg-detail.is-placeholder {
+  background:
+    radial-gradient(80% 90% at 10% 100%, rgb(242 239 232 / 0.07), transparent 62%),
+    linear-gradient(200deg, #262421, #161514 85%);
+}
+/* entrée à l'écran : volet couleur du fond (cartes des demandes : la carte entière apparaît, voir base.css) */
+.has-reveal .concierge .slot[data-reveal]::before { background: var(--beige); }
+
+/* ---------- Introduction sous le hero vidéo (vhs.css) : accroche, texte, grande photo ---------- */
+.cg-hero {
+  display: grid; gap: clamp(32px, 5vh, 56px);
+  padding-block: clamp(56px, 10vh, 128px) clamp(88px, 14vh, 180px);
+}
+.cg-hero__text { display: flex; flex-direction: column; gap: clamp(20px, 3vh, 32px); }
+.cg-hero__t {
+  max-width: 12ch;
+  font: 400 clamp(3rem, 1.2rem + 5.4vw, 7.6rem) / var(--lh-display) var(--font-wide);
+  letter-spacing: 0.005em; text-transform: uppercase;
+  text-wrap: balance;
+}
+.cg-hero__t em { font-style: normal; color: var(--rec); }
+.cg-hero__intro { max-width: 46ch; font-size: clamp(1rem, 0.95rem + 0.25vw, 1.15rem); line-height: 1.7; color: var(--ink-mute); }
+.slot--cg-hero { aspect-ratio: 4 / 5; max-height: 78svh; }
+
+@media (min-width: 900px) {
+  .cg-hero {
+    grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+    align-items: end; column-gap: clamp(40px, 6vw, 112px);
+  }
+  .slot--cg-hero {
+    aspect-ratio: auto; max-height: none;
+    height: clamp(520px, calc(100svh - var(--header-h) - 2 * clamp(32px, 6vh, 72px)), 920px);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .cg-hero__text > * { animation: rise 1.3s var(--ease-out) both; }
+  .cg-hero__t { animation-delay: 0.1s; }
+  .cg-hero__intro { animation-delay: 0.25s; }
+  .slot--cg-hero { animation: cg-photo 1.6s var(--ease-out) 0.1s both; }
+}
+@keyframes cg-photo { from { opacity: 0; transform: scale(0.97); } }
+
+/* ---------- Rôle de la conciergerie ---------- */
+.cg-role { padding-block: 0 clamp(96px, 16vh, 200px); }
+.cg-role__t {
+  max-width: 15ch;
+  font: 400 clamp(2.6rem, 1.2rem + 5vw, 6.6rem) / var(--lh-display) var(--font-wide);
+  text-transform: uppercase; text-wrap: balance;
+}
+.cg-role__t em { font-style: normal; color: var(--rec); }
+.cg-role__p--a {
+  max-width: 36ch; margin-top: clamp(32px, 6vh, 64px);
+  font: 300 clamp(1.3rem, 1.05rem + 0.9vw, 1.85rem) / 1.35 var(--font-display);
+}
+.slot--cg-wide { aspect-ratio: 4 / 3; margin-block: clamp(56px, 10vh, 120px); }
+.cg-role__pair { display: grid; gap: clamp(32px, 5vh, 48px); }
+.slot--cg-detail { aspect-ratio: 4 / 5; max-width: 420px; }
+.cg-role__p--b { max-width: 44ch; font-size: clamp(1rem, 0.95rem + 0.25vw, 1.15rem); line-height: 1.75; color: var(--ink-mute); }
+
+@media (min-width: 720px) { .slot--cg-wide { aspect-ratio: 21 / 9; } }
+@media (min-width: 900px) {
+  .cg-role__p--a { margin-left: calc(100% * 5 / 12); }
+  .cg-role__pair { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: center; }
+  .slot--cg-detail { grid-column: 2 / span 4; max-width: none; }
+  .cg-role__p--b { grid-column: 7 / span 5; }
+}
+
+/* ---------- Exemples de demandes : quatre formats, en quinconce ---------- */
+.cg-services { padding-block: clamp(96px, 16vh, 200px); background: var(--beige-2); }
+.cg-services__head { display: grid; gap: 16px; margin-bottom: clamp(56px, 10vh, 112px); }
+.cg-services__t {
+  font: 400 clamp(2.4rem, 1.2rem + 4.4vw, 6rem) / var(--lh-display) var(--font-wide);
+  letter-spacing: 0.005em; text-transform: uppercase;
+}
+.cg-services__note {
+  max-width: 40ch;
+  font: italic 400 clamp(1.15rem, 1rem + 0.5vw, 1.5rem) / 1.35 var(--font-display);
+  color: var(--ink-mute);
+}
+
+.cg-list { display: grid; gap: clamp(56px, 9vh, 96px); }
+.cg-item { display: flex; flex-direction: column; }
+.cg-item .slot { margin-bottom: clamp(20px, 3vh, 28px); }
+.cg-item--travel .slot { aspect-ratio: 4 / 5; }
+.cg-item--access .slot { aspect-ratio: 1; }
+.cg-item--artists .slot { aspect-ratio: 3 / 2; }
+.cg-item--custom .slot { aspect-ratio: 3 / 4; }
+.cg-item__t {
+  margin-bottom: 12px;
+  font: 400 clamp(1.6rem, 1.2rem + 1.2vw, 2.4rem) / 1.2 var(--font-wide);   /* petit corps : un peu plus que --lh-display */
+  letter-spacing: 0.01em; text-transform: uppercase;
+}
+.cg-item p { max-width: 42ch; color: var(--ink-mute); line-height: 1.7; }
+
+@media (min-width: 720px) and (max-width: 899px) {
+  .cg-list { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 24px; }
+  .cg-item:nth-child(even) { margin-top: 96px; }
+}
+@media (min-width: 900px) {
+  .cg-list { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(24px, 2.4vw, 40px); row-gap: clamp(72px, 10vh, 120px); align-items: start; }
+  .cg-item--travel { grid-column: 1 / span 5; }
+  .cg-item--access { grid-column: 7 / span 6; margin-top: clamp(96px, 12vw, 200px); }
+  .cg-item--artists { grid-column: 2 / span 6; }
+  .cg-item--custom { grid-column: 9 / span 4; margin-top: clamp(64px, 9vw, 160px); }
+}
+
+/* ---------- Invitation ---------- */
+.cg-next { padding-block: clamp(112px, 18vh, 220px); }
+.cg-next__in { display: flex; flex-direction: column; align-items: center; gap: clamp(28px, 4vh, 44px); text-align: center; }
+.cg-next__t { font: 400 clamp(3rem, 1.2rem + 6vw, 8rem) / var(--lh-display) var(--font-wide); text-transform: uppercase; }
