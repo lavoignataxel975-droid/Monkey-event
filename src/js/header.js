@@ -2,6 +2,8 @@
  * Header fixe : transparent sur le hero (texte clair), plein (fond beige) dès que le hero est dépassé
  * et sur les autres pages. Menu compact sous 1024 px.
  */
+import { t } from '../i18n/index.js';
+
 const DESKTOP = window.matchMedia('(min-width: 1024px)');
 
 export function initHeader() {
@@ -32,7 +34,7 @@ function initMenu(header) {
 
   const setOpen = (open, { restoreFocus = true } = {}) => {
     toggle.setAttribute('aria-expanded', String(open));
-    if (label) label.textContent = open ? 'Fermer le menu' : 'Ouvrir le menu';
+    if (label) { label.dataset.i18n = open ? 'menu.close' : 'menu.open'; label.textContent = t(label.dataset.i18n); }
     header.classList.toggle('is-open', open);
     document.documentElement.classList.toggle('is-locked', open);
     if (open) {

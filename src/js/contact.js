@@ -3,8 +3,11 @@
  * Validation à la saisie et à l'envoi ; envoi vers `contact.formEndpoint` (POST, FormData).
  * Sans service d'envoi configuré, le formulaire le dit : aucun envoi n'est simulé.
  */
+import { t, onLangChange } from '../i18n/index.js';
+
 export function initContact(cfg = {}) {
   fillCoords(cfg);
+  onLangChange(() => fillCoords(cfg));   // « (nouvel onglet) » des réseaux sociaux
   const form = document.querySelector('[data-contact-form]');
   if (form) initForm(form, cfg);
 }
@@ -24,7 +27,7 @@ function fillCoords({ email, phone, address, socials = [] }) {
   }
   if (socials.length && row('socials')) {
     setValue(value('socials'), socials.map((s) =>
-      `<a href="${attr(s.url)}" target="_blank" rel="noopener">${esc(s.name)}<span class="sr-only"> (nouvel onglet)</span></a>`).join(''));
+      `<a href="${attr(s.url)}" target="_blank" rel="noopener">${esc(s.name)}<span class="sr-only"> ${esc(t('newtab'))}</span></a>`).join(''));
     row('socials').hidden = false;
   }
 }
@@ -32,15 +35,10 @@ function fillCoords({ email, phone, address, socials = [] }) {
 function setValue(el, html) {
   el.innerHTML = html;
   el.classList.remove('is-empty');
+  delete el.dataset.i18n;            // valeur réelle : plus de libellé « À compléter » à traduire
 }
 
-/* ---------- Formulaire ---------- */
-const MESSAGES = {
-  nom: { valueMissing: 'Indiquez votre nom et votre prénom.', tooShort: 'Indiquez votre nom et votre prénom.' },
-  email: { valueMissing: 'Indiquez votre adresse e-mail.', typeMismatch: 'Cette adresse e-mail ne semble pas valide.', patternMismatch: 'Cette adresse e-mail ne semble pas valide.' },
-  telephone: { patternMismatch: 'Ce numéro de téléphone ne semble pas valide.' },
-  message: { valueMissing: 'Écrivez votre message.', tooShort: 'Votre message est un peu court (10 caractères minimum).' },
-};
+/* ---------- Formulaire (messages : src/i18n → err.*, status.*) ---------- */
 
 function initForm(form, cfg) {
   const fields = [...form.querySelectorAll('input:not([name="site"]), textarea')];
@@ -62,7 +60,8 @@ function initForm(form, cfg) {
     const err = document.getElementById(`${field.id}-err`);
     field.setAttribute('aria-invalid', String(Boolean(key)));
     if (err) {
-      err.textContent = key ? MESSAGES[field.name]?.[key] ?? 'Ce champ est incorrect.' : '';
+      const msg = `err.${field.name}.${key}`;
+      err.textContent = key ? (t(msg) === msg ? t('err.generic') : t(msg)) : '';
       err.hidden = !key;
     }
     return !key;
@@ -73,29 +72,43 @@ function initForm(form, cfg) {
     field.addEventListener('input', () => { if (field.getAttribute('aria-invalid') === 'true') check(field); });
   }
 
-  const show = (type, html) => {
+  // message d'état : gardé en mémoire pour être re-traduit si la langue change
+  let last = null;
+  const render = () => {
+    if (!last) return;
+    const mail = last.withEmail && cfg.email ? `<a href="mailto:${attr(cfg.email)}">${esc(cfg.email)}</a>` : '';
+    status.innerHTML = esc(t(`status.${last.type}`)) + (mail ? esc(t(`status.${last.type}.email`)).replace('{email}', mail) : '');
+  };
+  const show = (type, withEmail = false) => {
+    last = { type, withEmail };
     status.className = `form__status is-${type}`;
-    status.innerHTML = html;
+    render();
     status.hidden = false;
   };
 
-  const setBusy = (busy) => {
-    submit.disabled = busy;
-    form.setAttribute('aria-busy', String(busy));
-    submitLabel.textContent = busy ? 'Envoi en cours…' : 'Envoyer mon message';
+  const setBusy = (state) => {
+    submit.disabled = state;
+    form.setAttribute('aria-busy', String(state));
+    submitLabel.dataset.i18n = state ? 'form.sending' : 'form.send';
+    submitLabel.textContent = t(submitLabel.dataset.i18n);
   };
+
+  onLangChange(() => {
+    render();
+    fields.filter((f) => f.getAttribute('aria-invalid') === 'true').forEach(check);   // erreurs affichées
+  });
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
     status.hidden = true;
+    last = null;
 
     const invalid = fields.filter((f) => !check(f));
     if (invalid.length) { invalid[0].focus(); return; }
     if (form.elements.site.value) return;              // robot : rien n'est envoyé
 
     if (!cfg.formEndpoint) {
-      show('info', 'L’envoi en ligne n’est pas encore activé : votre message n’a pas été envoyé.'
-        + (cfg.email ? ` Vous pouvez nous écrire directement à <a href="mailto:${attr(cfg.email)}">${esc(cfg.email)}</a>.` : ''));
+      show('info', true);
       return;
     }
 
@@ -109,10 +122,9 @@ function initForm(form, cfg) {
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       form.reset();
       fields.forEach((f) => { f.removeAttribute('aria-invalid'); delete f.dataset.touched; });
-      show('success', 'Merci, votre message a bien été envoyé.');
+      show('success');
     } catch {
-      show('error', 'Une erreur est survenue : votre message n’a pas été envoyé. Merci de réessayer dans quelques instants.'
-        + (cfg.email ? ` Vous pouvez aussi nous écrire à <a href="mailto:${attr(cfg.email)}">${esc(cfg.email)}</a>.` : ''));
+      show('error', true);
     } finally {
       clearTimeout(timer);
       setBusy(false);

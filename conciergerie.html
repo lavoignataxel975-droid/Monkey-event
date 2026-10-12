@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Conciergerie · Monkey Production</title>
-  <meta name="description" content="Une conciergerie pensée pour les artistes, les personnalités et ceux dont le temps est précieux : un accompagnement personnalisé, discret et flexible.">
+  <!-- @include head -->
+  <title data-i18n="cg.meta.title">Conciergerie · Monkey Production</title>
+  <meta name="description" data-i18n-attr="content:cg.meta.desc" content="Une conciergerie pensée pour les artistes, les personnalités et ceux dont le temps est précieux : un accompagnement personnalisé, discret et flexible.">
   <meta name="theme-color" content="#0b0b0a">
   <link rel="icon" href="data:,">
   <!-- vidéo du hero : préchargement de l'image d'aperçu (src/site.config.js → hero.poster) -->
@@ -34,30 +35,30 @@
 
       <div class="vhs-hero__mark">
         <p class="vhs-tag">DROP 03</p>
-        <h1 class="vhs-hero__t vhs-hero__t--conciergerie rgb" id="cg-page-t">Conciergerie</h1>
+        <h1 class="vhs-hero__t vhs-hero__t--conciergerie rgb" id="cg-page-t" data-i18n="cg.h1">Conciergerie</h1>
       </div>
     </section>
 
     <!-- ============ Introduction : accroche, texte, grande photographie ============ -->
     <section class="cg-hero wrap" aria-labelledby="cg-t">
       <div class="cg-hero__text">
-        <h2 class="cg-hero__t" id="cg-t">Le privilège de ne <em>rien</em> avoir à prévoir.</h2>
-        <p class="cg-hero__intro">Une conciergerie pensée pour les artistes, les personnalités et ceux dont le temps est précieux. Des demandes du quotidien aux expériences les plus singulières, chaque détail est anticipé pour vous permettre de vous concentrer sur l’essentiel.</p>
+        <h2 class="cg-hero__t" id="cg-t" data-i18n-html="cg.hero.t">Le privilège de ne <em>rien</em> avoir à prévoir.</h2>
+        <p class="cg-hero__intro" data-i18n="cg.hero.intro">Une conciergerie pensée pour les artistes, les personnalités et ceux dont le temps est précieux. Des demandes du quotidien aux expériences les plus singulières, chaque détail est anticipé pour vous permettre de vous concentrer sur l’essentiel.</p>
       </div>
-      <div class="slot slot--cg-hero" data-slot-media="conciergerie.hero" data-label="Photographie à venir"></div>
+      <div class="slot slot--cg-hero" data-slot-media="conciergerie.hero" data-label="Photographie à venir" data-i18n-attr="data-label:ph.photo"></div>
     </section>
 
     <!-- ============ Le rôle d'une conciergerie de luxe ============ -->
     <section class="cg-role wrap" aria-labelledby="role-t">
-      <h2 class="cg-role__t" id="role-t" data-reveal>Bien plus qu’un service. <em>Un accès à l’essentiel.</em></h2>
+      <h2 class="cg-role__t" id="role-t" data-reveal data-i18n-html="cg.role.t">Bien plus qu’un service. <em>Un accès à l’essentiel.</em></h2>
 
-      <p class="cg-role__p cg-role__p--a" data-reveal>Une conciergerie de luxe accompagne ses clients dans l’organisation de leur quotidien, de leurs déplacements et de leurs expériences. Elle prend en charge les recherches, les réservations et la coordination de demandes personnalisées, avec un objectif simple&nbsp;: faire gagner du temps, simplifier chaque étape et offrir une expérience fluide.</p>
+      <p class="cg-role__p cg-role__p--a" data-reveal data-i18n="cg.role.a">Une conciergerie de luxe accompagne ses clients dans l’organisation de leur quotidien, de leurs déplacements et de leurs expériences. Elle prend en charge les recherches, les réservations et la coordination de demandes personnalisées, avec un objectif simple&nbsp;: faire gagner du temps, simplifier chaque étape et offrir une expérience fluide.</p>
 
-      <div class="slot slot--cg-wide" data-slot-media="conciergerie.wide" data-label="Photographie à venir" data-reveal></div>
+      <div class="slot slot--cg-wide" data-slot-media="conciergerie.wide" data-label="Photographie à venir" data-i18n-attr="data-label:ph.photo" data-reveal></div>
 
       <div class="cg-role__pair">
-        <div class="slot slot--cg-detail" data-slot-media="conciergerie.detail" data-label="Photographie à venir" data-reveal></div>
-        <p class="cg-role__p cg-role__p--b" data-reveal>Pour un artiste en tournée, une personnalité en déplacement ou un client souhaitant profiter pleinement de son séjour, elle devient un interlocuteur privilégié, capable de coordonner les différents besoins avec discrétion, réactivité et attention.</p>
+        <div class="slot slot--cg-detail" data-slot-media="conciergerie.detail" data-label="Photographie à venir" data-i18n-attr="data-label:ph.photo" data-reveal></div>
+        <p class="cg-role__p cg-role__p--b" data-reveal data-i18n="cg.role.b">Pour un artiste en tournée, une personnalité en déplacement ou un client souhaitant profiter pleinement de son séjour, elle devient un interlocuteur privilégié, capable de coordonner les différents besoins avec discrétion, réactivité et attention.</p>
       </div>
     </section>
 
@@ -65,30 +66,30 @@
     <section class="cg-services" aria-labelledby="serv-t">
       <div class="wrap">
         <header class="cg-services__head" data-reveal>
-          <h2 class="cg-services__t" id="serv-t">Quelques exemples de demandes</h2>
-          <p class="cg-services__note">Chaque accompagnement se construit selon vos besoins et les possibilités du moment.</p>
+          <h2 class="cg-services__t" id="serv-t" data-i18n="cg.serv.t">Quelques exemples de demandes</h2>
+          <p class="cg-services__note" data-i18n="cg.serv.note">Chaque accompagnement se construit selon vos besoins et les possibilités du moment.</p>
         </header>
 
         <ul class="cg-list">
           <li class="cg-item cg-item--travel" data-reveal>
-            <div class="slot" data-slot-media="conciergerie.services.travel" data-label="Photographie à venir"></div>
-            <h3 class="cg-item__t">Déplacements &amp; séjours</h3>
-            <p>Organisation des déplacements, recherche d’hébergements haut de gamme, transferts privés et coordination des étapes d’un séjour.</p>
+            <div class="slot" data-slot-media="conciergerie.services.travel" data-label="Photographie à venir" data-i18n-attr="data-label:ph.photo"></div>
+            <h3 class="cg-item__t" data-i18n="cg.travel.t">Déplacements &amp; séjours</h3>
+            <p data-i18n="cg.travel.p">Organisation des déplacements, recherche d’hébergements haut de gamme, transferts privés et coordination des étapes d’un séjour.</p>
           </li>
           <li class="cg-item cg-item--access" data-reveal>
-            <div class="slot" data-slot-media="conciergerie.services.access" data-label="Photographie à venir"></div>
-            <h3 class="cg-item__t">Expériences &amp; accès privilégiés</h3>
-            <p>Recherche d’expériences personnalisées, réservations de restaurants, organisation de sorties privées et demandes particulières selon les possibilités.</p>
+            <div class="slot" data-slot-media="conciergerie.services.access" data-label="Photographie à venir" data-i18n-attr="data-label:ph.photo"></div>
+            <h3 class="cg-item__t" data-i18n="cg.access.t">Expériences &amp; accès privilégiés</h3>
+            <p data-i18n="cg.access.p">Recherche d’expériences personnalisées, réservations de restaurants, organisation de sorties privées et demandes particulières selon les possibilités.</p>
           </li>
           <li class="cg-item cg-item--artists" data-reveal>
-            <div class="slot" data-slot-media="conciergerie.services.artists" data-label="Photographie à venir"></div>
-            <h3 class="cg-item__t">Accompagnement des artistes</h3>
-            <p>Coordination des besoins pratiques lors des déplacements, des tournées ou des périodes de production&nbsp;: hébergement, transport, organisation du quotidien et gestion des demandes logistiques.</p>
+            <div class="slot" data-slot-media="conciergerie.services.artists" data-label="Photographie à venir" data-i18n-attr="data-label:ph.photo"></div>
+            <h3 class="cg-item__t" data-i18n="cg.artists.t">Accompagnement des artistes</h3>
+            <p data-i18n="cg.artists.p">Coordination des besoins pratiques lors des déplacements, des tournées ou des périodes de production&nbsp;: hébergement, transport, organisation du quotidien et gestion des demandes logistiques.</p>
           </li>
           <li class="cg-item cg-item--custom" data-reveal>
-            <div class="slot" data-slot-media="conciergerie.services.custom" data-label="Photographie à venir"></div>
-            <h3 class="cg-item__t">Demandes sur mesure</h3>
-            <p>Recherche de solutions adaptées à des besoins spécifiques, avec un interlocuteur unique pour simplifier l’organisation et coordonner les différents prestataires.</p>
+            <div class="slot" data-slot-media="conciergerie.services.custom" data-label="Photographie à venir" data-i18n-attr="data-label:ph.photo"></div>
+            <h3 class="cg-item__t" data-i18n="cg.custom.t">Demandes sur mesure</h3>
+            <p data-i18n="cg.custom.p">Recherche de solutions adaptées à des besoins spécifiques, avec un interlocuteur unique pour simplifier l’organisation et coordonner les différents prestataires.</p>
           </li>
         </ul>
       </div>
@@ -97,8 +98,8 @@
     <!-- ============ Invitation (ajout provisoire : le brief reçu s'arrêtait avant cette partie) ============ -->
     <section class="cg-next wrap" aria-labelledby="cg-next-t">
       <div class="cg-next__in" data-reveal>
-        <h2 class="cg-next__t" id="cg-next-t">Une demande particulière&nbsp;?</h2>
-        <a class="btn" href="/contact">Nous contacter <span class="btn__arrow" aria-hidden="true">→</span></a>
+        <h2 class="cg-next__t" id="cg-next-t" data-i18n="cg.next.t">Une demande particulière&nbsp;?</h2>
+        <a class="btn" href="/contact"><span data-i18n="cg.next.cta">Nous contacter</span> <span class="btn__arrow" aria-hidden="true">→</span></a>
       </div>
     </section>
   </main>

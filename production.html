@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Production · Monkey Production</title>
-  <meta name="description" content="Production de clips musicaux et direction artistique : Monkey Production crée des univers visuels avec les artistes.">
+  <!-- @include head -->
+  <title data-i18n="prod.meta.title">Production · Monkey Production</title>
+  <meta name="description" data-i18n-attr="content:prod.meta.desc" content="Production de clips musicaux et direction artistique : Monkey Production crée des univers visuels avec les artistes.">
   <meta name="theme-color" content="#0b0b0a">
   <link rel="icon" href="data:,">
   <!-- vidéo du hero : préchargement de l'image d'aperçu (src/site.config.js → hero.poster) -->
@@ -36,37 +37,37 @@
 
       <div class="vhs-hero__mark">
         <p class="vhs-tag">DROP 01</p>
-        <h1 class="vhs-hero__t vhs-hero__t--production rgb" id="prod-t">Production</h1>
+        <h1 class="vhs-hero__t vhs-hero__t--production rgb" id="prod-t" data-i18n="prod.h1">Production</h1>
       </div>
     </section>
 
     <!-- ============ Accroche ============ -->
-    <section class="prod-hero wrap" aria-label="Notre approche">
-      <p class="prod-hero__lede">Des univers visuels pensés avec les artistes, de la direction artistique à la production de leurs projets musicaux.</p>
+    <section class="prod-hero wrap" aria-label="Notre approche" data-i18n-attr="aria-label:prod.approach">
+      <p class="prod-hero__lede" data-i18n="prod.lede">Des univers visuels pensés avec les artistes, de la direction artistique à la production de leurs projets musicaux.</p>
     </section>
 
     <!-- ============ Projet : Aya Nakamura, « Chimiyé » (le clip au centre de la page)
          Titre du clip confirmé : « Chimiyé ». ============ -->
     <article class="proj proj--aya wrap" aria-labelledby="aya-t">
       <header class="proj__head" data-reveal>
-        <p class="proj__kind">Clip musical</p>
+        <p class="proj__kind" data-i18n="prod.kind">Clip musical</p>
         <h2 class="proj__title" id="aya-t">
           <span class="proj__artist">Aya Nakamura</span>
-          <span class="proj__work">«&nbsp;Chimiyé&nbsp;»</span>
+          <span class="proj__work" data-i18n="prod.aya.work">«&nbsp;Chimiyé&nbsp;»</span>
         </h2>
       </header>
 
-      <p class="aya-statement" data-reveal>Après un an d’absence, Aya Nakamura choisit <em>Monkey Production</em> pour signer le clip «&nbsp;Chimiyé&nbsp;».</p>
+      <p class="aya-statement" data-reveal data-i18n-html="prod.aya.statement">Après un an d’absence, Aya Nakamura choisit <em>Monkey Production</em> pour signer le clip «&nbsp;Chimiyé&nbsp;».</p>
 
-      <div class="slot slot--aya-main" data-slot-media="production.aya.main" data-label="Extrait du clip à venir" data-reveal><span class="slot__osd" aria-hidden="true"><span class="tl osd__rec"><i></i>REC</span><span class="tr">AYA NAKAMURA · «&nbsp;CHIMIYÉ&nbsp;»</span><span class="bl">PLAY ▶</span><span class="br" data-osd-tc>00:00:00:00</span></span></div>
+      <div class="slot slot--aya-main" data-slot-media="production.aya.main" data-label="Extrait du clip à venir" data-i18n-attr="data-label:ph.clip" data-reveal><span class="slot__osd" aria-hidden="true"><span class="tl osd__rec"><i></i>REC</span><span class="tr">AYA NAKAMURA · «&nbsp;CHIMIYÉ&nbsp;»</span><span class="bl">PLAY ▶</span><span class="br" data-osd-tc>00:00:00:00</span></span></div>
 
       <div class="proj__body">
         <div class="proj__text" data-reveal>
-          <p class="proj__lede">Une identité visuelle forte, une atmosphère singulière et des images qui imposent leur propre langage.</p>
-          <p>Un univers immédiatement reconnaissable, pensé pour laisser une empreinte bien au-delà de l’écran.</p>
+          <p class="proj__lede" data-i18n="prod.aya.lede">Une identité visuelle forte, une atmosphère singulière et des images qui imposent leur propre langage.</p>
+          <p data-i18n="prod.aya.text">Un univers immédiatement reconnaissable, pensé pour laisser une empreinte bien au-delà de l’écran.</p>
         </div>
-        <div class="slot slot--aya-a" data-slot-media="production.aya.side1" data-label="Image à venir" data-reveal></div>
-        <div class="slot slot--aya-b" data-slot-media="production.aya.side2" data-label="Coulisses à venir" data-reveal></div>
+        <div class="slot slot--aya-a" data-slot-media="production.aya.side1" data-label="Image à venir" data-i18n-attr="data-label:ph.image" data-reveal></div>
+        <div class="slot slot--aya-b" data-slot-media="production.aya.side2" data-label="Coulisses à venir" data-i18n-attr="data-label:ph.bts" data-reveal></div>
       </div>
     </article>
 
@@ -74,31 +75,31 @@
     <article class="proj proj--dore" aria-labelledby="dore-t">
       <div class="wrap proj__grid">
         <header class="proj__head" data-reveal>
-          <p class="proj__kind">Clip musical</p>
+          <p class="proj__kind" data-i18n="prod.kind">Clip musical</p>
           <h2 class="proj__title" id="dore-t">
             <span class="proj__artist">Julien Doré</span>
-            <span class="proj__work">«&nbsp;Nous&nbsp;»</span>
+            <span class="proj__work" data-i18n="prod.dore.work">«&nbsp;Nous&nbsp;»</span>
           </h2>
         </header>
 
-        <div class="slot slot--dore-main slot--crt" data-slot-media="production.dore.main" data-label="Extrait du clip à venir" data-reveal><span class="slot__osd" aria-hidden="true"><span class="tl osd__rec"><i></i>REC</span><span class="bl">PLAY ▶</span><span class="br" data-osd-tc>00:00:00:00</span></span></div>
+        <div class="slot slot--dore-main slot--crt" data-slot-media="production.dore.main" data-label="Extrait du clip à venir" data-i18n-attr="data-label:ph.clip" data-reveal><span class="slot__osd" aria-hidden="true"><span class="tl osd__rec"><i></i>REC</span><span class="bl">PLAY ▶</span><span class="br" data-osd-tc>00:00:00:00</span></span></div>
 
         <div class="proj__text" data-reveal>
-          <p class="proj__lede">Entre science-fiction et poésie absurde, Julien Doré se retrouve échoué sur une plage, entouré de dinosaures et d’animaux sauvages.</p>
-          <p>Un univers visuel singulier, teinté d’humour et d’imaginaire, qui transforme le clip en véritable parenthèse cinématographique.</p>
+          <p class="proj__lede" data-i18n="prod.dore.lede">Entre science-fiction et poésie absurde, Julien Doré se retrouve échoué sur une plage, entouré de dinosaures et d’animaux sauvages.</p>
+          <p data-i18n="prod.dore.text">Un univers visuel singulier, teinté d’humour et d’imaginaire, qui transforme le clip en véritable parenthèse cinématographique.</p>
         </div>
 
-        <div class="slot slot--dore-a" data-slot-media="production.dore.side1" data-label="Photographie à venir" data-reveal></div>
-        <div class="slot slot--dore-b" data-slot-media="production.dore.side2" data-label="Visuel à venir" data-reveal></div>
+        <div class="slot slot--dore-a" data-slot-media="production.dore.side1" data-label="Photographie à venir" data-i18n-attr="data-label:ph.photo" data-reveal></div>
+        <div class="slot slot--dore-b" data-slot-media="production.dore.side2" data-label="Visuel à venir" data-i18n-attr="data-label:ph.visual" data-reveal></div>
       </div>
     </article>
 
     <!-- ============ Votre prochain projet ============ -->
     <section class="prod-next wrap" aria-labelledby="next-t">
       <div class="prod-next__in" data-reveal>
-        <h2 class="prod-next__t" id="next-t">Vous avez un <em>univers</em> à faire exister&nbsp;?</h2>
-        <p class="prod-next__p">Clip musical, direction artistique ou projet audiovisuel&nbsp;: parlons de votre prochaine production.</p>
-        <a class="btn btn--light" href="/contact">Parlons de votre projet <span class="btn__arrow" aria-hidden="true">→</span></a>
+        <h2 class="prod-next__t" id="next-t" data-i18n-html="prod.next.t">Vous avez un <em>univers</em> à faire exister&nbsp;?</h2>
+        <p class="prod-next__p" data-i18n="prod.next.p">Clip musical, direction artistique ou projet audiovisuel&nbsp;: parlons de votre prochaine production.</p>
+        <a class="btn btn--light" href="/contact"><span data-i18n="prod.next.cta">Parlons de votre projet</span> <span class="btn__arrow" aria-hidden="true">→</span></a>
       </div>
     </section>
   </main>

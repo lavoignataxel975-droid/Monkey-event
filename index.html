@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Monkey Production · Clips, événements et conciergerie</title>
-  <meta name="description" content="Monkey Production : production de clips musicaux, événements et conciergerie de luxe.">
+  <!-- @include head -->
+  <title data-i18n="home.meta.title">Monkey Production · Clips, événements et conciergerie</title>
+  <meta name="description" data-i18n-attr="content:home.meta.desc" content="Monkey Production : production de clips musicaux, événements et conciergerie de luxe.">
   <meta name="theme-color" content="#0b0b0a">
   <link rel="icon" href="data:,">
   <!-- vidéo du hero : préchargement de l'image d'aperçu (src/site.config.js → hero.poster) -->
@@ -39,7 +40,7 @@
           <span class="hero__scroll-ico" aria-hidden="true">
             <svg viewBox="0 0 16 24" width="16" height="24"><path d="M8 1v21M2 16l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
           </span>
-          <span class="sr-only">Faire défiler vers la suite</span>
+          <span class="sr-only" data-i18n="home.scroll">Faire défiler vers la suite</span>
         </a>
         <p class="hero__place" lang="es">Ibiza</p>
       </div>
@@ -48,15 +49,15 @@
     <!-- ============ Trois portes : Production (activité principale) / Events / Conciergerie (images : src/site.config.js → blocks)
          Ordinateur : Production en grand à gauche, Events et Conciergerie superposées à droite.
          Tablette : Production sur toute la largeur, les deux autres côte à côte. Mobile : les trois empilées. -->
-    <section class="gates" id="univers" aria-label="Nos activités">
+    <section class="gates" id="univers" aria-label="Nos activités" data-i18n-attr="aria-label:home.gates">
       <a class="gate gate--production" id="production" href="/production" data-reveal>
         <span class="gate__media" data-block-media="production" data-sizes="(min-width: 1024px) 58vw, 100vw" aria-hidden="true"></span>
         <span class="gate__veil" aria-hidden="true"></span>
         <span class="gate__frame" aria-hidden="true"></span>
         <span class="gate__body">
           <span class="vhs-tag">DROP 01</span>
-          <span class="gate__label rgb">Production</span>
-          <span class="gate__cta">Découvrir <span class="gate__arrow" aria-hidden="true">→</span></span>
+          <span class="gate__label rgb" data-i18n="home.gate.production">Production</span>
+          <span class="gate__cta"><span data-i18n="home.gate.cta">Découvrir</span> <span class="gate__arrow" aria-hidden="true">→</span></span>
         </span>
       </a>
       <a class="gate gate--events" id="events" href="/evenements" data-reveal>
@@ -65,8 +66,8 @@
         <span class="gate__frame" aria-hidden="true"></span>
         <span class="gate__body">
           <span class="vhs-tag">DROP 02</span>
-          <span class="gate__label rgb" lang="en">Events</span>
-          <span class="gate__cta">Découvrir <span class="gate__arrow" aria-hidden="true">→</span></span>
+          <span class="gate__label rgb" lang="en" data-i18n="home.gate.events">Events</span>
+          <span class="gate__cta"><span data-i18n="home.gate.cta">Découvrir</span> <span class="gate__arrow" aria-hidden="true">→</span></span>
         </span>
       </a>
       <a class="gate gate--conciergerie" id="conciergerie" href="/conciergerie" data-reveal>
@@ -75,8 +76,8 @@
         <span class="gate__frame" aria-hidden="true"></span>
         <span class="gate__body">
           <span class="vhs-tag">DROP 03</span>
-          <span class="gate__label rgb">Conciergerie</span>
-          <span class="gate__cta">Découvrir <span class="gate__arrow" aria-hidden="true">→</span></span>
+          <span class="gate__label rgb" data-i18n="home.gate.concierge">Conciergerie</span>
+          <span class="gate__cta"><span data-i18n="home.gate.cta">Découvrir</span> <span class="gate__arrow" aria-hidden="true">→</span></span>
         </span>
       </a>
     </section>
@@ -84,7 +85,7 @@
     <!-- ============ Partenaires (logos : src/site.config.js → partners) ============ -->
     <section class="partners" aria-labelledby="partners-t">
       <div class="wrap">
-        <h2 class="partners__t" id="partners-t" data-reveal>Partenaires</h2>
+        <h2 class="partners__t" id="partners-t" data-reveal data-i18n="home.partners">Partenaires</h2>
         <ul class="partners__list" data-partners data-reveal></ul>
       </div>
     </section>

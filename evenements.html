@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Events · Monkey Production</title>
-  <meta name="description" content="Les destinations où Monkey Production a déjà organisé des événements.">
+  <!-- @include head -->
+  <title data-i18n="events.meta.title">Events · Monkey Production</title>
+  <meta name="description" data-i18n-attr="content:events.meta.desc" content="Les destinations où Monkey Production a déjà organisé des événements.">
   <meta name="theme-color" content="#0b0b0a">
   <link rel="icon" href="data:,">
   <!-- vidéo du hero : préchargement de l'image d'aperçu (src/site.config.js → hero.poster) -->
@@ -32,25 +33,25 @@
 
       <div class="vhs-hero__mark">
         <p class="vhs-tag">DROP 02</p>
-        <h1 class="vhs-hero__t vhs-hero__t--events rgb" id="events-t" lang="en">Events</h1>
+        <h1 class="vhs-hero__t vhs-hero__t--events rgb" id="events-t" lang="en" data-i18n="events.h1">Events</h1>
       </div>
     </section>
 
-    <section class="events wrap" aria-label="Nos destinations">
+    <section class="events wrap" aria-label="Nos destinations" data-i18n-attr="aria-label:events.section">
       <header class="events__intro">
         <div class="events__text">
-          <p class="events__lede">Chacune des destinations présentées ici est un lieu où nous avons déjà eu le plaisir d’organiser un événement.</p>
+          <p class="events__lede" data-i18n="events.lede">Chacune des destinations présentées ici est un lieu où nous avons déjà eu le plaisir d’organiser un événement.</p>
           <div class="events__more">
-            <p>Cette sélection n’est pas exhaustive&nbsp;: selon vos envies, vos besoins et la nature de votre projet, nous pouvons imaginer votre événement sous d’autres horizons.</p>
+            <p data-i18n="events.more">Cette sélection n’est pas exhaustive&nbsp;: selon vos envies, vos besoins et la nature de votre projet, nous pouvons imaginer votre événement sous d’autres horizons.</p>
             <!-- numéro : src/site.config.js → contact.phone -->
-            <p>Pour obtenir des renseignements précis sur une destination ou nous parler de votre projet, appelez-nous directement au <span class="phone is-empty" data-agency-phone>numéro à compléter</span>.</p>
+            <p><span data-i18n="events.call">Pour obtenir des renseignements précis sur une destination ou nous parler de votre projet, appelez-nous directement au</span> <span class="phone is-empty" data-agency-phone data-i18n="phone.missing">numéro à compléter</span>.</p>
           </div>
         </div>
       </header>
 
       <!-- Destinations : src/site.config.js → destinations (src/js/destinations.js) -->
       <section class="events__dest" aria-labelledby="dest-t">
-        <h2 class="sr-only" id="dest-t">Destinations</h2>
+        <h2 class="sr-only" id="dest-t" data-i18n="events.dest">Destinations</h2>
         <ul class="dest-grid" data-destinations></ul>
       </section>
     </section>

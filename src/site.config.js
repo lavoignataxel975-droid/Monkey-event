@@ -34,42 +34,42 @@ export default {
   partnerSlots: 5,
 
   // Page Événements : destinations où l'agence a déjà organisé des événements (ordre = ordre d'affichage).
-  // image : { src (JPG), webp?, srcset? (largeurs), position? (cadrage object-position) } ; alt = description de la photo.
+  // image : { src (JPG), webp?, srcset? (largeurs), position? (cadrage object-position) } ; alt = description de la photo ({ fr, en } : suit la langue du site).
   destinations: [
     {
       name: 'Seychelles',
       image: { src: '/media/destinations/seychelles.jpg', webp: '/media/destinations/seychelles.webp', sizes: { 640: '-640', 1046: '' }, position: '50% 42%' },
-      alt: 'Vue aérienne d’une côte de rochers de granit et de sable blanc aux Seychelles',
+      alt: { fr: 'Vue aérienne d’une côte de rochers de granit et de sable blanc aux Seychelles', en: 'Aerial view of a coastline of granite boulders and white sand in the Seychelles' },
     },
     {
       name: 'Bali',
       image: { src: '/media/destinations/bali.jpg', webp: '/media/destinations/bali.webp', sizes: { 640: '-640', 1032: '' }, position: '50% 58%' },
-      alt: 'Piscine à débordement face aux rizières en terrasses et aux montagnes de Bali',
+      alt: { fr: 'Piscine à débordement face aux rizières en terrasses et aux montagnes de Bali', en: 'Infinity pool overlooking terraced rice fields and the mountains of Bali' },
     },
     {
       name: 'Corse',
       image: { src: '/media/destinations/corse.jpg', webp: '/media/destinations/corse.webp', sizes: { 640: '-640', 1038: '' }, position: '50% 45%' },
-      alt: 'Aiguilles de granit et forêt de pins au coucher du soleil en Corse',
+      alt: { fr: 'Aiguilles de granit et forêt de pins au coucher du soleil en Corse', en: 'Granite peaks and pine forest at sunset in Corsica' },
     },
     {
       name: 'Marrakech',
       image: { src: '/media/destinations/marrakech.jpg', webp: '/media/destinations/marrakech.webp', sizes: { 640: '-640', 1041: '' }, position: '50% 62%' },
-      alt: 'Façade ocre aux arches sculptées se reflétant dans un bassin à Marrakech',
+      alt: { fr: 'Façade ocre aux arches sculptées se reflétant dans un bassin à Marrakech', en: 'Ochre façade with carved arches reflected in a pool in Marrakech' },
     },
     {
       name: 'Mykonos',
       image: { src: '/media/destinations/mykonos.jpg', webp: '/media/destinations/mykonos.webp', sizes: { 640: '-640', 1058: '' }, position: '50% 55%' },
-      alt: 'Terrasse avec bassin ouverte sur la mer au coucher du soleil à Mykonos',
+      alt: { fr: 'Terrasse avec bassin ouverte sur la mer au coucher du soleil à Mykonos', en: 'Terrace with a plunge pool opening onto the sea at sunset in Mykonos' },
     },
     {
       name: 'Saint-Barthélemy',
       image: { src: '/media/destinations/saint-barthelemy.jpg', webp: '/media/destinations/saint-barthelemy.webp', sizes: { 640: '-640', 1037: '' }, position: '50% 62%' },
-      alt: 'Baie turquoise et collines verdoyantes à Saint-Barthélemy',
+      alt: { fr: 'Baie turquoise et collines verdoyantes à Saint-Barthélemy', en: 'Turquoise bay and green hills in Saint-Barthélemy' },
     },
     {
       name: 'Ibiza',
       image: { src: '/media/destinations/ibiza.jpg', webp: '/media/destinations/ibiza.webp', sizes: { 640: '-640', 844: '' }, position: '50% 55%' },
-      alt: 'Crique aux eaux turquoise bordée de falaises calcaires à Ibiza',
+      alt: { fr: 'Crique aux eaux turquoise bordée de falaises calcaires à Ibiza', en: 'Turquoise cove framed by limestone cliffs in Ibiza' },
     },
   ],
 

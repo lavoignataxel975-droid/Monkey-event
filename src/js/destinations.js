@@ -1,15 +1,23 @@
 /**
  * Page Événements : grille des destinations (src/site.config.js → destinations)
  * et numéro de l'agence dans le texte d'introduction (contact.phone).
+ * Texte alternatif : chaîne, ou { fr, en } pour suivre la langue active.
  */
+import { lang, onLangChange } from '../i18n/index.js';
+
 export function initDestinations(list = [], phone = null) {
   fillPhone(phone);
   const host = document.querySelector('[data-destinations]');
   if (!host) return;
   host.innerHTML = list.map(card).join('');
+  onLangChange(() => host.querySelectorAll('img').forEach((img, i) => { img.alt = altOf(list[i]); }));
 }
 
-function card({ name, image, alt = '' }) {
+const altOf = ({ alt = '' }) => (typeof alt === 'string' ? alt : alt[lang] ?? alt.fr ?? '');
+
+function card(dest) {
+  const { name, image } = dest;
+  const alt = altOf(dest);
   const widths = Object.entries(image.sizes ?? {});
   const set = (base) => widths.map(([w, sfx]) => `${base.replace(/(\.\w+)$/, `${sfx}$1`)} ${w}w`).join(', ');
   // 2 cartes par rangée dès 720 px, 1 en dessous
@@ -31,6 +39,7 @@ function fillPhone(phone) {
   for (const el of document.querySelectorAll('[data-agency-phone]')) {
     el.innerHTML = `<a href="tel:${esc(phone.replace(/[^\d+]/g, ''))}">${esc(phone)}</a>`;
     el.classList.remove('is-empty');
+    delete el.dataset.i18n;          // le numéro remplace le libellé « à compléter » dans toutes les langues
   }
 }
 

@@ -23,6 +23,8 @@ import { initContact } from './js/contact.js';
 import { initDestinations } from './js/destinations.js';
 import { initSlots } from './js/slots.js';
 import './js/vhs.js';
+import { initLangSwitch } from './js/lang-switch.js';
+import { applyI18n } from './i18n/index.js';
 
 initHeader();
 initHeroVideo(config.hero, config);
@@ -33,3 +35,7 @@ initReveal();
 initContact(config.contact);
 
 for (const el of document.querySelectorAll('[data-year]')) el.textContent = new Date().getFullYear();
+
+// langue active (FR par défaut, ou celle mémorisée) : appliquée une fois tous les composants en place
+initLangSwitch();
+applyI18n();

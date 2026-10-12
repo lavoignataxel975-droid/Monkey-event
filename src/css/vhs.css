@@ -47,6 +47,23 @@ body::before {
 .menu__nav a { font: 400 clamp(2.4rem, 1.6rem + 4vw, 3.6rem) / var(--lh-display) var(--font-wide); letter-spacing: 0.01em; }
 .menu__nav a[aria-current='page'] { color: var(--rec); }
 
+/* sélecteur de langue FR / EN (header) : deux touches mono, la langue active en négatif */
+.lang { display: inline-flex; margin-left: auto; border: 1px solid rgb(242 239 232 / 0.35); }
+.lang__opt {
+  position: relative; width: 34px; height: 26px; display: grid; place-items: center;
+  padding-left: 0.14em;                        /* compense l'espacement après la dernière lettre */
+  font: 600 0.62rem / 1 var(--font-mono); letter-spacing: 0.14em;
+  color: var(--cassette);
+  transition: color var(--t-fast) var(--ease), background-color var(--t-fast) var(--ease);
+}
+.lang__opt::before { content: ''; position: absolute; inset: -9px -1px; }   /* zone tactile 44 px */
+.lang__opt[aria-pressed='true'] { background: var(--paper); color: var(--tape); cursor: default; }
+@media (hover: hover) { .lang__opt[aria-pressed='false']:hover { color: var(--paper); } }
+@media (min-width: 1024px) {
+  .hdr__nav { margin-left: auto; }             /* navigation et langue regroupées à droite */
+  .lang { margin-left: 0; }
+}
+
 /* ---------- Hero vidéo commun (accueil, Production, Events, Conciergerie) ----------
    Vidéo plein cadre + OSD caméscope + titre monumental, toujours entier : sa taille remplit la largeur utile
    (--fit = largeur du texte en em, mesurée sur Anton) sans dépasser --cap (hauteur d'écran). */
@@ -102,6 +119,7 @@ body::before {
 }
 .vhs-hero__t--events { --fit: 2.66; --cap: min(38svh, 340px); }
 .vhs-hero__t--conciergerie { --fit: 5.06; }
+:root:lang(en) .vhs-hero__t--conciergerie { --fit: 3.95; }   /* « CONCIERGE » (anglais) ≈ 3,90 em */
 .vhs-hero__l { display: inline-block; }
 /* accueil : « MONKEY PRODUCTION » sur une ligne en paysage, sur deux lignes en portrait (plus monumental) */
 .vhs-hero__t--home { --fit: 7.76; --cap: min(30svh, 232px); }

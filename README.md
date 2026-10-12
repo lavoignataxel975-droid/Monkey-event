@@ -40,6 +40,15 @@ URL propres : `/evenements`, `/production`, `/conciergerie`, `/contact`, `/menti
 - **Hero vidéo commun** (`.hero.vhs-hero`, styles dans `vhs.css`) : accueil, Production, Events, Conciergerie (pas Contact). Vidéo `hero` de `src/site.config.js` partout (Production : `production.hero` la remplace si renseigné). Titre monumental toujours entier : taille = largeur utile ÷ `--fit` (largeur du mot en em sur Anton), plafonnée par `--cap` ; « MONKEY PRODUCTION » passe sur deux lignes en portrait. Nouveau titre : ajouter une variante `.vhs-hero__t--x { --fit: … }`.
 - **Navigation** (header, menu mobile, footer, portes de l'accueil) : Accueil · Production · Events · Conciergerie · Contact. Curseur du navigateur, aucun curseur personnalisé.
 
+
+## Traduction FR / EN
+
+- Sélecteur FR / EN dans le header (`src/js/lang-switch.js`) ; langue mémorisée dans le navigateur (`monkey-production-lang`), appliquée avant l'affichage (`partials/head.html`, inclus en tête de chaque page).
+- Textes : `src/i18n/fr.js` (référence, identique aux textes écrits dans les pages) et `src/i18n/en.js`. **Toute clé ajoutée dans l'un doit exister dans l'autre.**
+- Dans le HTML : `data-i18n="clé"` (texte), `data-i18n-html="clé"` (texte avec `<em>`), `data-i18n-attr="aria-label:clé; data-label:clé"` (attributs, libellés des emplacements « à venir »).
+- Dans le JS : `t('clé')` et `onLangChange(fn)` (`src/i18n/index.js`). Textes alternatifs des destinations : `alt: { fr, en }` dans `src/site.config.js`.
+- Noms propres et titres d'œuvres non traduits (Monkey Production, Aya Nakamura, « Chimiyé », Julien Doré, « Nous », destinations) ; guillemets anglais “ ” en EN.
+
 ## Médias
 
 Tout se dépose dans `public/media/` puis se déclare dans `src/site.config.js` (chemin public = sans `public/`).

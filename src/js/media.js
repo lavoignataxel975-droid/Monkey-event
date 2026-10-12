@@ -2,10 +2,14 @@
  * Branche les médias déclarés dans src/site.config.js : images des trois portes de l'accueil, logo, partenaires.
  * Emplacement sans média = fond temporaire neutre (CSS), jamais de visuel inventé.
  */
+import { t, onLangChange } from '../i18n/index.js';
+
 export function initMedia(config) {
   blocks(config.blocks ?? {});
   logo(config.logo);
-  partners(config.partners ?? [], config.partnerSlots ?? 5);
+  const renderPartners = () => partners(config.partners ?? [], config.partnerSlots ?? 5);
+  renderPartners();
+  onLangChange(renderPartners);   // libellés des emplacements et « (nouvel onglet) »
 }
 
 function blocks(map) {
@@ -42,13 +46,13 @@ function partners(list, slots) {
   host.classList.toggle('is-placeholder', !list.length);
 
   host.innerHTML = items.map((p) => {
-    if (!p) return '<li class="partner partner--empty" aria-hidden="true"><span>Logo partenaire</span></li>';
+    if (!p) return `<li class="partner partner--empty" aria-hidden="true"><span>${escape(t('partners.slot'))}</span></li>`;
     const img = `<img src="${p.logo}" alt="${escape(p.name)}" loading="lazy" decoding="async">`;
     return `<li class="partner">${p.url
-      ? `<a href="${p.url}" target="_blank" rel="noopener">${img}<span class="sr-only"> (nouvel onglet)</span></a>`
+      ? `<a href="${p.url}" target="_blank" rel="noopener">${img}<span class="sr-only"> ${escape(t('newtab'))}</span></a>`
       : img}</li>`;
   }).join('');
-  if (!list.length) host.setAttribute('aria-label', 'Emplacements réservés aux logos des partenaires');
+  if (!list.length) host.setAttribute('aria-label', t('partners.slots'));
 }
 
 const escape = (s = '') => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);

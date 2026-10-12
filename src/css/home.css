@@ -140,6 +140,7 @@
   font: 500 0.62rem / 1 var(--font-text); letter-spacing: 0.24em; text-transform: uppercase;
   color: rgb(246 241 232 / 0.5);
 }
+:root:lang(en) .gate__media.is-placeholder::after { content: 'Visual coming soon'; }
 .gate--production .gate__media.is-placeholder {
   background:
     radial-gradient(90% 70% at 80% 10%, rgb(139 154 127 / 0.35), transparent 60%),
