@@ -26,11 +26,24 @@ export default {
     conciergerie: null,   // ex. { src: '/media/blocks/conciergerie.jpg' }
   },
 
-  // Logo Monkey Production (pied de page) : { src, alt }
+  // Logo : désormais intégré directement dans partials/header.html et footer.html (public/media/logo/monkey-production.png) ; ce réglage ne sert plus
   logo: null,       // ex. { src: '/media/logo/monkey-production.svg', alt: 'Monkey Production' }
 
-  // Partenaires : [{ name, logo, url? }] ; tant que la liste est vide, `partnerSlots` emplacements vides sont affichés.
-  partners: [],     // ex. { name: 'Nom du partenaire', logo: '/media/partners/nom.svg', url: 'https://…' }
+  // Partenaires : [{ name, logo, ratio, url? }] ; tant que la liste est vide, `partnerSlots` emplacements vides sont affichés.
+  // logo = fichier officiel (Wikimedia Commons / Wikipédia), affiché en monochrome clair par le CSS ;
+  // ratio = largeur / hauteur du fichier : sert à équilibrer les poids visuels (même surface pour chaque logo) ;
+  // optical (facultatif, 1 par défaut) = correction à l'œil : > 1 pour un logo fin ou aéré, < 1 pour un logo très plein.
+  // OM : fond blanc de l'écusson retiré (transparent) pour le rendu monochrome.
+  partners: [
+    { name: 'Sony Music', logo: '/media/partners/sony-music.svg', ratio: 1.07, optical: 1.08 },
+    { name: 'Universal Music Group', logo: '/media/partners/universal-music-group.svg', ratio: 2.7, optical: 1.25 },
+    { name: 'Warner Music Group', logo: '/media/partners/warner-music-group.svg', ratio: 2.54, optical: 0.88 },
+    { name: 'L’Oréal', logo: '/media/partners/loreal.svg', ratio: 5.52 },
+    { name: 'Accor', logo: '/media/partners/accor.svg', ratio: 1.23 },
+    { name: 'Vinci', logo: '/media/partners/vinci.svg', ratio: 3.86 },
+    { name: 'Olympique de Marseille', logo: '/media/partners/olympique-de-marseille.svg', ratio: 1 },
+    { name: 'Stade de France', logo: '/media/partners/stade-de-france.svg', ratio: 6.82, optical: 0.92 },
+  ],
   partnerSlots: 5,
 
   // Page Événements : destinations où l'agence a déjà organisé des événements (ordre = ordre d'affichage).

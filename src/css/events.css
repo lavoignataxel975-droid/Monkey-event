@@ -1,35 +1,54 @@
 /* ==========================================================================
    Événements : hero vidéo (vhs.css) · texte d'introduction · grille des destinations
    ========================================================================== */
-.events { padding-block: clamp(48px, 9vh, 112px) clamp(88px, 14vh, 168px); }
+.events { padding-block: clamp(48px, 9vh, 112px) 0; }   /* pas de marge basse : l'appel final (.prod-next--events) suit directement */
 
+/* introduction : bloc titre + promesse → services (icônes) → approche sur mesure, puis les destinations */
 .events__intro {
-  container-type: inline-size;               /* la phrase d'introduction suit la largeur de la section */
-  display: flex; flex-direction: column; gap: 20px;
+  container-type: inline-size;               /* le bloc titre suit la largeur de la section */
+  display: flex; flex-direction: column;
   margin-bottom: clamp(56px, 9vh, 112px);
-}
-
-/* texte d'introduction : sur toute la largeur de la section */
-.events__text {
-  display: grid; gap: clamp(28px, 4vh, 48px);
-  margin-top: clamp(16px, 3vh, 32px);
   color: var(--ink-mute);
 }
-.events__lede {
-  /* 4,4 % de la largeur de la section : deux lignes pleines sur ordinateur, quelle que soit la largeur */
-  font: 300 clamp(1.75rem, 4.4cqi, 6rem) / 1.15 var(--font-display);
-  letter-spacing: 0.005em;
-  color: var(--ink);
+
+/* titre + promesse : une seule voix (Anton, capitales, même taille) ; sur ordinateur, une phrase par ligne,
+   taille calculée pour que la plus longue occupe toute la largeur (--fit = sa longueur en em, mesurée sur Anton) */
+.events__t {
+  --fit: 20.75;                                 /* phrase française la plus longue ≈ 20,6 em */
+  font: 400 clamp(2rem, 8.6cqi, 2.6rem) / var(--lh-display) var(--font-wide);   /* mobile : retour à la ligne libre, équilibré */
+  letter-spacing: 0.005em; text-transform: uppercase; color: var(--ink);
   text-wrap: balance;
 }
-.events__more {
-  display: grid; gap: 16px clamp(32px, 5vw, 96px);
-  font-size: clamp(1rem, 0.92rem + 0.35vw, 1.25rem); line-height: 1.65;
-  padding-top: clamp(24px, 3.5vh, 40px);
-  border-top: 1px solid var(--line);
+:lang(en) .events__t { --fit: 19.25; }          /* anglais ≈ 19,1 em */
+.events__t-l { display: block; }                 /* chaque phrase commence sa ligne */
+@media (min-width: 720px) {
+  .events__t { font-size: min(calc(100cqi / var(--fit)), 8rem); }
+  .events__t-l { white-space: nowrap; }
 }
-@media (min-width: 900px) {
-  .events__more { grid-template-columns: 1fr 1fr; }
+
+/* services : quatre icônes dessinées pour le site, une ligne, quatre colonnes égales (espaces identiques) */
+.svc {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  justify-items: center; align-items: center;
+  margin-block: clamp(56px, 10vh, 120px);
+  color: var(--ink);
+}
+.svc__item { display: grid; place-items: center; }
+.svc__ico {
+  display: block; width: clamp(52px, 2.2rem + 3.4vw, 92px); height: auto; aspect-ratio: 1; overflow: visible;
+  fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round;   /* trait commun aux quatre icônes */
+}
+
+/* approche sur mesure : bloc éditorial sur toute la largeur, « sur mesure » à la couleur d'accent */
+.events__custom {
+  font: 300 clamp(1.3rem, 0.95rem + 1.5vw, 2.5rem) / 1.4 var(--font-text);
+  color: var(--ink);
+  text-wrap: pretty;
+}
+.events__custom em { font-style: normal; font-weight: 500; color: var(--rec); }
+.events__call {
+  margin-top: clamp(24px, 4vh, 40px);
+  font-size: clamp(1rem, 0.92rem + 0.35vw, 1.25rem); line-height: 1.65;
 }
 .phone a {
   color: var(--ink); font-weight: 500; white-space: nowrap;
@@ -93,3 +112,6 @@
     box-shadow: 0 28px 60px -36px rgb(28 26 23 / 0.55);
   }
 }
+
+/* ---------- Appel final : composant .prod-next (production.css) ; seul écart avec la dernière destination ---------- */
+.prod-next.prod-next--events { padding-top: clamp(40px, 6vh, 72px); }   /* double classe : production.css est chargé après events.css */

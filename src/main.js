@@ -1,5 +1,6 @@
 import '@fontsource-variable/cormorant';
 import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource-variable/archivo/wdth-italic.css';   // italique réelle des textes descriptifs (sinon oblique synthétique)
 import '@fontsource/anton/400.css';
 import '@fontsource/ibm-plex-mono/500.css';
 import '@fontsource/ibm-plex-mono/600.css';

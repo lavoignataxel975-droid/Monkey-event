@@ -41,7 +41,7 @@ button { font: inherit; color: inherit; cursor: pointer; }
   color: var(--pv-mute); white-space: nowrap;
   transition: color 0.2s, background-color 0.2s, border-color 0.2s;
 }
-.pv-pages button:hover, .pv-seg button:hover, .pv-btn:hover { color: var(--pv-text); border-color: rgb(246 241 232 / 0.3); }
+.pv-pages button:not([aria-pressed='true']):hover, .pv-seg button:not([aria-pressed='true']):hover, .pv-btn:not([data-frames][aria-pressed='true']):hover { color: var(--pv-text); border-color: rgb(246 241 232 / 0.3); }   /* le bouton actif garde son texte sombre au survol */
 .pv-pages [aria-pressed='true'], .pv-seg [aria-pressed='true'], .pv-btn[data-frames][aria-pressed='true'] {
   color: var(--pv-bg); background: var(--pv-text); border-color: var(--pv-text);
 }

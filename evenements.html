@@ -7,7 +7,10 @@
   <title data-i18n="events.meta.title">Events · Monkey Production</title>
   <meta name="description" data-i18n-attr="content:events.meta.desc" content="Les destinations où Monkey Production a déjà organisé des événements.">
   <meta name="theme-color" content="#0b0b0a">
-  <link rel="icon" href="data:,">
+  <!-- favicon : « M » du logo officiel, blanc sur noir (public/favicon.ico, favicon-32.png, apple-touch-icon.png) -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <!-- vidéo du hero : préchargement de l'image d'aperçu (src/site.config.js → hero.poster) -->
   <link rel="preload" as="image" href="/media/hero/monkey-events-hero-poster.jpg" fetchpriority="high">
 </head>
@@ -39,14 +42,23 @@
 
     <section class="events wrap" aria-label="Nos destinations" data-i18n-attr="aria-label:events.section">
       <header class="events__intro">
-        <div class="events__text">
-          <p class="events__lede" data-i18n="events.lede">Chacune des destinations présentées ici est un lieu où nous avons déjà eu le plaisir d’organiser un événement.</p>
-          <div class="events__more">
-            <p data-i18n="events.more">Cette sélection n’est pas exhaustive&nbsp;: selon vos envies, vos besoins et la nature de votre projet, nous pouvons imaginer votre événement sous d’autres horizons.</p>
-            <!-- numéro : src/site.config.js → contact.phone -->
-            <p><span data-i18n="events.call">Pour obtenir des renseignements précis sur une destination ou nous parler de votre projet, appelez-nous directement au</span> <span class="phone is-empty" data-agency-phone data-i18n="phone.missing">numéro à compléter</span>.</p>
-          </div>
-        </div>
+        <!-- titre + promesse : un seul bloc typographique (même police, même taille), une phrase par ligne sur ordinateur -->
+        <h2 class="events__t">
+          <span class="events__t-l" data-i18n="events.t">Séminaires, voyages, événements en tout genre…</span>
+          <span class="events__t-l" data-i18n="events.lede">Une personne de confiance pour s’occuper de tout.</span>
+        </h2>
+
+        <!-- services : jeu d'icônes dessiné pour le site (grille 64, trait 1,75, extrémités rondes ; style commun : .svc__ico) -->
+        <ul class="svc" aria-label="Nos services" data-i18n-attr="aria-label:events.svc">
+          <li class="svc__item"><svg class="svc__ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><g transform="rotate(45 32 32) translate(0 1)"><path d="M32 5c2.2 0 3.6 2.6 3.6 5.6V25L57 37v3.6L35.6 34.4V47l6.4 5.2V55L32 52.2 22 55v-2.8l6.4-5.2V34.4L7 40.6V37l21.4-12V10.6C28.4 7.6 29.8 5 32 5Z"/><path d="M32 12v5"/></g></svg><span class="sr-only" data-i18n="events.svc.travel">Voyages et déplacements</span></li>
+          <li class="svc__item"><svg class="svc__ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M12.5 42H6.5a1.5 1.5 0 0 1-1.5-1.5V35c0-1.6 1.1-2.9 2.6-3.2L19 29.6l7.3-6.4a4 4 0 0 1 2.6-1h13.6a4 4 0 0 1 3.1 1.5l5 6 6.6 1.4A3.6 3.6 0 0 1 60 34.6v5.9a1.5 1.5 0 0 1-1.5 1.5h-5"/><path d="M22.5 42h20"/><circle cx="17.5" cy="42" r="5"/><circle cx="48" cy="42" r="5"/><path d="M23 29.6l5.3-4.6h7.2v4.6Z"/><path d="M38.5 25h4l3.8 4.6h-7.8Z"/><path d="M5 36.5h3M56.5 34h3.5"/></svg><span class="sr-only" data-i18n="events.svc.car">Transport privé et transferts</span></li>
+          <li class="svc__item"><svg class="svc__ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M3 52h58"/><path d="M6 52V36h34v16"/><path d="M3 36h40"/><path d="M14 36V25h30v11"/><path d="M11 25h36"/><path d="M19 30h20"/><path d="M11 41h12v11"/><path d="M28 41h8v6h-8z"/><path d="M44 52h16"/><path d="M45 57h13"/><path d="M53 52V30"/><path d="M53 30c-1.5-3.5-5-5-8.5-4.5M53 30c1-3.8 4.6-5.6 8-5M53 30c-3-1.2-6.5 0-8 2.5M53 30c3.2-.8 6.2.8 7.5 3.4"/></svg><span class="sr-only" data-i18n="events.svc.stay">Hébergement et lieux de séjour</span></li>
+          <li class="svc__item"><svg class="svc__ico" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><path d="M46 2v5"/><circle cx="46" cy="14" r="7"/><path d="M39 14h14M40.5 10h11M40.5 18h11M46 7c-3 4.2-3 9.8 0 14M46 7c3 4.2 3 9.8 0 14"/><path d="M57 5v4M55 7h4M36 4v3M34.5 5.5h3M58 18v2.5M56.75 19.25h2.5"/><circle cx="23" cy="26" r="4"/><path d="M24.5 31l2.5 12"/><path d="M25 34l7-5 5-7.5"/><path d="M25 34l-7 1-4-5.5"/><path d="M27 43l-7.5 6 1 9.5"/><path d="M27 43l9 4.5 1.5 8.5"/></svg><span class="sr-only" data-i18n="events.svc.night">Soirées, sorties et clubbing</span></li>
+        </ul>
+
+        <p class="events__custom" data-i18n-html="events.more">Les destinations présentées ci-dessous sont quelques exemples de nos expériences passées. Chaque projet est unique&nbsp;: nous imaginons avec vous une expérience entièrement <em>sur mesure</em>, selon vos envies. Tout est possible.</p>
+        <!-- numéro : src/site.config.js → contact.phone -->
+        <p class="events__call"><span data-i18n="events.call">Pour obtenir des renseignements précis sur une destination ou nous parler de votre projet, appelez-nous directement au</span> <span class="phone is-empty" data-agency-phone data-i18n="phone.missing">numéro à compléter</span>.</p>
       </header>
 
       <!-- Destinations : src/site.config.js → destinations (src/js/destinations.js) -->
@@ -54,6 +66,14 @@
         <h2 class="sr-only" id="dest-t" data-i18n="events.dest">Destinations</h2>
         <ul class="dest-grid" data-destinations></ul>
       </section>
+    </section>
+
+    <!-- ============ Appel final (même composant que la page Production : .prod-next, production.css) ============ -->
+    <section class="prod-next prod-next--events wrap" aria-labelledby="events-next-t">
+      <div class="prod-next__in" data-reveal>
+        <h2 class="prod-next__t" id="events-next-t" data-i18n-html="events.next.t">Une envie d’<em>ailleurs</em>&nbsp;?</h2>
+        <a class="btn btn--light" href="/contact"><span data-i18n="events.next.cta">Parlons de votre projet</span> <span class="btn__arrow" aria-hidden="true">→</span></a>
+      </div>
     </section>
   </main>
 

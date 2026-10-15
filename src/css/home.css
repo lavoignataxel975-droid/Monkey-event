@@ -245,26 +245,30 @@
   font: 300 clamp(2.2rem, 1.4rem + 3vw, 4.2rem) / 1 var(--font-display);
   letter-spacing: 0.04em;
 }
+/* logos seuls, sans cadre : 2 colonnes (mobile), 4 colonnes × 2 rangées (tablette et ordinateur) */
 .partners__list {
-  display: flex; flex-wrap: wrap; justify-content: center;   /* dernière ligne centrée */
-  gap: clamp(12px, 1.6vw, 24px);
+  --logo: clamp(52px, 2.2rem + 3vw, 92px);    /* hauteur d'un logo carré ; les autres en dérivent (--k) */
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(40px, 7vh, 72px) clamp(24px, 4vw, 64px);
   max-width: 1200px; margin-inline: auto;
 }
+@media (min-width: 720px) { .partners__list { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .partner {
-  flex: 0 1 calc((100% - 4 * clamp(12px, 1.6vw, 24px)) / 5);
-  min-width: 140px;
-  aspect-ratio: 3 / 2;
   display: grid; place-items: center;
-  border: 1px solid var(--line); border-radius: var(--radius);
+  height: var(--logo);
 }
 .partner > a { display: grid; place-items: center; width: 100%; height: 100%; }
 .partner img {
-  max-width: 68%; max-height: 52px; width: auto; height: auto; object-fit: contain;
-  opacity: 0.86; transition: opacity var(--t-fast) var(--ease);
+  height: calc(var(--logo) * var(--k, 0.6)); width: auto; max-width: 100%; object-fit: contain;
+  filter: brightness(0) invert(1);   /* monochrome clair : la forme d'origine, une seule couleur */
+  opacity: 0.72; transition: opacity var(--t-fast) var(--ease);
 }
-@media (hover: hover) { .partner a:hover img { opacity: 1; } }
+@media (hover: hover) { .partner:hover img { opacity: 1; } }
 
-.partner--empty { border-style: dashed; border-color: rgb(242 239 232 / 0.16); }
+.partner--empty {
+  height: auto; aspect-ratio: 3 / 2;
+  border: 1px dashed rgb(242 239 232 / 0.16); border-radius: var(--radius);
+}
 .partner--empty span {
   font-size: 0.62rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase;
   color: var(--cassette);

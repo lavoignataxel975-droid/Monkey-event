@@ -7,7 +7,10 @@
   <title data-i18n="contact.meta.title">Contact · Monkey Production</title>
   <meta name="description" data-i18n-attr="content:contact.meta.desc" content="Contacter Monkey Production.">
   <meta name="theme-color" content="#0b0b0a">
-  <link rel="icon" href="data:,">
+  <!-- favicon : « M » du logo officiel, blanc sur noir (public/favicon.ico, favicon-32.png, apple-touch-icon.png) -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 </head>
 <body data-page="contact">
   <!-- @include header -->
@@ -17,6 +20,11 @@
       <header class="contact__head">
         <p class="osd-strip" aria-hidden="true"><span class="osd__rec"><i></i>REC</span><span>Monkey Production</span><span data-osd-tc>00:00:00:00</span><span data-osd-date>OCT.11 2026</span></p>
         <h1 class="page__t" data-i18n="contact.h1">Contact</h1>
+        <!-- le téléphone d'abord ; l'e-mail pour demander un rappel -->
+        <div class="contact__intro">
+          <p data-i18n-html="contact.intro.a">Notre moyen de communication privilégié est l’<em>appel téléphonique</em>&nbsp;: il nous permet de mieux comprendre vos besoins et d’échanger directement sur votre projet.</p>
+          <p data-i18n-html="contact.intro.b">Vous préférez être rappelé&nbsp;? Envoyez-nous un e-mail en présentant brièvement votre idée et en indiquant le jour et l’heure qui vous conviendraient pour un <em>rendez-vous téléphonique</em>.</p>
+        </div>
       </header>
 
       <div class="contact__grid">

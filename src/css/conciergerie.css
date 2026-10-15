@@ -42,8 +42,9 @@
 @media (min-width: 900px) {
   .cg-hero {
     grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
-    align-items: end; column-gap: clamp(40px, 6vw, 112px);
+    align-items: start; column-gap: clamp(40px, 6vw, 112px);   /* haut du titre sur la même ligne que le haut de la photo */
   }
+  .cg-hero__t { text-box: trim-start cap alphabetic; }       /* le haut des capitales (et non de l'interlignage) touche cette ligne */
   .slot--cg-hero {
     aspect-ratio: auto; max-height: none;
     height: clamp(520px, calc(100svh - var(--header-h) - 2 * clamp(32px, 6vh, 72px)), 920px);
@@ -67,7 +68,7 @@
 .cg-role__t em { font-style: normal; color: var(--rec); }
 .cg-role__p--a {
   max-width: 36ch; margin-top: clamp(32px, 6vh, 64px);
-  font: 300 clamp(1.3rem, 1.05rem + 0.9vw, 1.85rem) / 1.35 var(--font-display);
+  font: 300 clamp(1.3rem, 1.05rem + 0.9vw, 1.85rem) / 1.35 var(--font-text);
 }
 .slot--cg-wide { aspect-ratio: 4 / 3; margin-block: clamp(56px, 10vh, 120px); }
 .cg-role__pair { display: grid; gap: clamp(32px, 5vh, 48px); }
@@ -91,7 +92,7 @@
 }
 .cg-services__note {
   max-width: 40ch;
-  font: italic 400 clamp(1.15rem, 1rem + 0.5vw, 1.5rem) / 1.35 var(--font-display);
+  font: italic 400 clamp(1.15rem, 1rem + 0.5vw, 1.5rem) / 1.35 var(--font-text);
   color: var(--ink-mute);
 }
 
@@ -125,3 +126,4 @@
 .cg-next { padding-block: clamp(112px, 18vh, 220px); }
 .cg-next__in { display: flex; flex-direction: column; align-items: center; gap: clamp(28px, 4vh, 44px); text-align: center; }
 .cg-next__t { font: 400 clamp(3rem, 1.2rem + 6vw, 8rem) / var(--lh-display) var(--font-wide); text-transform: uppercase; }
+.cg-next__t em { font-style: normal; color: var(--rec); }

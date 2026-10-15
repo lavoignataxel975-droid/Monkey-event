@@ -7,7 +7,10 @@
   <title data-i18n="prod.meta.title">Production · Monkey Production</title>
   <meta name="description" data-i18n-attr="content:prod.meta.desc" content="Production de clips musicaux et direction artistique : Monkey Production crée des univers visuels avec les artistes.">
   <meta name="theme-color" content="#0b0b0a">
-  <link rel="icon" href="data:,">
+  <!-- favicon : « M » du logo officiel, blanc sur noir (public/favicon.ico, favicon-32.png, apple-touch-icon.png) -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <!-- vidéo du hero : préchargement de l'image d'aperçu (src/site.config.js → hero.poster) -->
   <link rel="preload" as="image" href="/media/hero/monkey-events-hero-poster.jpg" fetchpriority="high">
 </head>
@@ -39,11 +42,6 @@
         <p class="vhs-tag">DROP 01</p>
         <h1 class="vhs-hero__t vhs-hero__t--production rgb" id="prod-t" data-i18n="prod.h1">Production</h1>
       </div>
-    </section>
-
-    <!-- ============ Accroche ============ -->
-    <section class="prod-hero wrap" aria-label="Notre approche" data-i18n-attr="aria-label:prod.approach">
-      <p class="prod-hero__lede" data-i18n="prod.lede">Des univers visuels pensés avec les artistes, de la direction artistique à la production de leurs projets musicaux.</p>
     </section>
 
     <!-- ============ Projet : Aya Nakamura, « Chimiyé » (le clip au centre de la page)
@@ -97,7 +95,7 @@
     <!-- ============ Votre prochain projet ============ -->
     <section class="prod-next wrap" aria-labelledby="next-t">
       <div class="prod-next__in" data-reveal>
-        <h2 class="prod-next__t" id="next-t" data-i18n-html="prod.next.t">Vous avez un <em>univers</em> à faire exister&nbsp;?</h2>
+        <h2 class="prod-next__t" id="next-t" data-i18n-html="prod.next.t">Vous avez un <em>univers</em> à produire&nbsp;?</h2>
         <p class="prod-next__p" data-i18n="prod.next.p">Clip musical, direction artistique ou projet audiovisuel&nbsp;: parlons de votre prochaine production.</p>
         <a class="btn btn--light" href="/contact"><span data-i18n="prod.next.cta">Parlons de votre projet</span> <span class="btn__arrow" aria-hidden="true">→</span></a>
       </div>

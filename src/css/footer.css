@@ -13,10 +13,12 @@
   letter-spacing: 0.18em; text-transform: uppercase;
 }
 .ftr__nav ul { display: flex; flex-wrap: wrap; gap: 8px clamp(24px, 3vw, 44px); }
-/* mobile : cinq liens sur deux colonnes alignées plutôt qu'un retour à la ligne irrégulier */
+/* mobile : deux moitiés, le logo seul à gauche (centré sur la hauteur des liens), les cinq liens empilés à droite */
 @media (max-width: 599px) {
-  .ftr__nav { width: 100%; }
-  .ftr__nav ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 24px; }
+  .ftr__main { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: center; column-gap: clamp(16px, 6vw, 32px); }
+  .ftr__main > .ftr__brand { justify-self: start; }                  /* le lien prend la largeur du logo, sans l'étirer à la colonne */
+  .ftr .ftr__brand .brand__logo { height: clamp(80px, 26vw, 112px); align-self: flex-start; }   /* un peu plus grand : contrepoids à la colonne de liens (sélecteur renforcé : vhs.css est chargé après) */
+  .ftr__nav ul { display: flex; flex-direction: column; gap: 0; }
 }
 .ftr__nav a {
   display: block; padding-block: 14px;   /* 44 px de haut */

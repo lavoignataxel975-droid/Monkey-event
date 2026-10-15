@@ -7,7 +7,10 @@
   <title data-i18n="cg.meta.title">Conciergerie · Monkey Production</title>
   <meta name="description" data-i18n-attr="content:cg.meta.desc" content="Une conciergerie pensée pour les artistes, les personnalités et ceux dont le temps est précieux : un accompagnement personnalisé, discret et flexible.">
   <meta name="theme-color" content="#0b0b0a">
-  <link rel="icon" href="data:,">
+  <!-- favicon : « M » du logo officiel, blanc sur noir (public/favicon.ico, favicon-32.png, apple-touch-icon.png) -->
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
   <!-- vidéo du hero : préchargement de l'image d'aperçu (src/site.config.js → hero.poster) -->
   <link rel="preload" as="image" href="/media/hero/monkey-events-hero-poster.jpg" fetchpriority="high">
 </head>
@@ -98,7 +101,7 @@
     <!-- ============ Invitation (ajout provisoire : le brief reçu s'arrêtait avant cette partie) ============ -->
     <section class="cg-next wrap" aria-labelledby="cg-next-t">
       <div class="cg-next__in" data-reveal>
-        <h2 class="cg-next__t" id="cg-next-t" data-i18n="cg.next.t">Une demande particulière&nbsp;?</h2>
+        <h2 class="cg-next__t" id="cg-next-t" data-i18n-html="cg.next.t">Une <em>demande</em> particulière&nbsp;?</h2>
         <a class="btn" href="/contact"><span data-i18n="cg.next.cta">Nous contacter</span> <span class="btn__arrow" aria-hidden="true">→</span></a>
       </div>
     </section>

@@ -46,18 +46,9 @@
 .has-reveal .slot[data-reveal].is-in::before { transform: scaleY(0); }
 .has-reveal .proj--dore .slot[data-reveal]::before { background: var(--surface); }
 
-/* ---------- Accroche sous le hero vidéo (le hero est commun : vhs.css) ---------- */
-.prod-hero { padding-block: clamp(56px, 10vh, 128px) clamp(80px, 13vh, 168px); }
-.prod-hero__lede {
-  max-width: 40ch;
-  font: italic 300 clamp(1.4rem, 1rem + 1.2vw, 2.1rem) / 1.25 var(--font-display);
-  color: var(--cream-mute);
-  text-wrap: balance;
-}
-@media (min-width: 900px) { .prod-hero__lede { margin-left: auto; text-align: right; } }
-
 /* ---------- Projets : éléments communs ---------- */
 .proj { padding-block: clamp(88px, 14vh, 180px); }
+.vhs-hero + .proj { padding-top: clamp(56px, 10vh, 128px); }   /* premier projet juste sous le hero : même respiration que l'introduction de Conciergerie */
 /* « Clip musical » : même étiquette que les tags DROP (vhs.css) */
 .proj__kind {
   display: inline-block; margin-bottom: clamp(16px, 2.4vh, 28px); padding: 5px 8px 4px;
@@ -65,10 +56,11 @@
   color: var(--rec); border: 1px solid var(--rec);
 }
 .proj__title { display: flex; flex-direction: column; }
-.proj__text { display: grid; gap: 20px; align-content: start; }
-.proj__text p:not(.proj__lede) { max-width: 46ch; color: var(--cream-mute); line-height: 1.7; }
+.proj__text { display: grid; gap: clamp(20px, 2.6vh, 28px); align-content: start; }
+/* textes explicatifs : un cran au-dessus du corps courant, toujours sous l'accroche (--lede ≥ 1,45 rem) */
+.proj__text p:not(.proj__lede) { max-width: 50ch; color: var(--cream-mute); font-size: clamp(1.0625rem, 0.98rem + 0.4vw, 1.3rem); line-height: 1.65; }
 .proj__lede {
-  font: 300 clamp(1.45rem, 1.1rem + 1vw, 2.1rem) / 1.25 var(--font-display);
+  font: 300 clamp(1.45rem, 1.1rem + 1vw, 2.1rem) / 1.25 var(--font-text);
   color: var(--cream);
   text-wrap: pretty;
 }
@@ -117,7 +109,7 @@
 @media (min-width: 900px) {
   .proj--aya .proj__work { padding-left: 16%; }
   .proj--aya .proj__body { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: start; }
-  .proj--aya .proj__text { grid-column: 1 / span 5; margin-bottom: 0; }
+  .proj--aya .proj__text { grid-column: 1 / span 6; margin-bottom: 0; }
   .slot--aya-a { grid-column: 7 / span 3; }
   .slot--aya-b { grid-column: 10 / span 3; margin-top: clamp(96px, 14vw, 220px); }
 }
@@ -176,7 +168,7 @@
   text-transform: uppercase; text-wrap: balance;
 }
 .prod-next__t em { font-style: normal; color: var(--rec); }
-.prod-next__p { max-width: 42ch; color: var(--cream-mute); font-size: clamp(1rem, 0.95rem + 0.25vw, 1.15rem); }
+.prod-next__p { max-width: 46ch; color: var(--cream-mute); font-size: clamp(1.0625rem, 0.98rem + 0.4vw, 1.3rem); line-height: 1.6; }
 .prod-next .btn { margin-top: clamp(12px, 2vh, 24px); }
 
 /* .btn--light : identique au bouton commun (contact.css) depuis le passage au fond noir */

@@ -21,11 +21,7 @@ body::before {
   border: 1px solid var(--rec);
 }
 
-/* ---------- Décalage RGB (titres) : au survol, puis recalage lent ---------- */
-.rgb { transition: text-shadow 0.45s var(--ease-out); }
-@media (hover: hover) {
-  .rgb:hover, .gate:hover .rgb { text-shadow: -3px 0 rgb(232 56 47 / 0.85), 3px 0 var(--cyan); }
-}
+/* Titres : aucun effet au survol (décalage RGB retiré le 2026-10-15, à la demande du client) ; la classe .rgb reste dans le HTML, sans style. */
 
 /* ---------- Header ---------- */
 .hdr.is-solid, .hdr.is-open {
@@ -41,8 +37,18 @@ body::before {
 .hdr__brand { padding-block: 13px; letter-spacing: 0; }
 .ftr__brand .brand__main { font-size: 2.2rem; }
 .ftr__brand .brand__sub { font-size: 0.66rem; }
+/* logo officiel (header et footer) : hauteur fixée, largeur déduite (proportions d'origine) */
+.brand__logo { width: auto; height: 44px; }
+.hdr__brand:has(.brand__logo) { padding-block: 10px; }   /* 44 + 2 × 10 = 64 px = --header-h mobile */
+.ftr__brand .brand__logo { height: 80px; }
+@media (min-width: 1024px) { .hdr__brand .brand__logo { height: 52px; } }   /* 52 + 20 = 72 px < 76 px */
+@media (hover: hover) {
+  .brand__logo { transition: filter 0.45s var(--ease-out); }
+  .brand:hover .brand__logo { filter: drop-shadow(-2px 0 rgb(232 56 47 / 0.85)) drop-shadow(2px 0 var(--cyan)); }   /* même décalage RGB que les titres */
+}
 .hdr__nav a { font: 500 0.72rem / 1 var(--font-mono); letter-spacing: 0.12em; }
 .hdr__nav a::after { background: var(--rec); height: 2px; }
+.hdr__nav a::before { content: ''; position: absolute; inset: -3px 0; }   /* zone tactile 44 px (interligne 1 de la police mono : lien visible de 38 px) */
 .menu { background: var(--tape); color: var(--paper); }
 .menu__nav a { font: 400 clamp(2.4rem, 1.6rem + 4vw, 3.6rem) / var(--lh-display) var(--font-wide); letter-spacing: 0.01em; }
 .menu__nav a[aria-current='page'] { color: var(--rec); }
@@ -207,17 +213,6 @@ body::before {
   background: linear-gradient(180deg, transparent, rgb(242 239 232 / 0.05) 35%, rgb(242 239 232 / 0.11) 50%, rgb(242 239 232 / 0.04) 65%, transparent);
   -webkit-backdrop-filter: blur(1px) saturate(1.4); backdrop-filter: blur(1px) saturate(1.4);
   animation: vhs-track 1.4s cubic-bezier(0.3, 0.1, 0.3, 1) both;
-}
-
-/* décalage RGB au survol : tous les grands titres */
-@media (hover: hover) {
-  .page__t:hover, .proj__artist:hover, .aya-statement:hover, .prod-next__t:hover, .cg-hero__t:hover,
-  .cg-role__t:hover, .cg-services__t:hover, .cg-next__t:hover, .partners__t:hover, .dest__fig:hover .dest__name,
-  .cg-item:hover .cg-item__t, .brand:hover .brand__main {
-    text-shadow: -3px 0 rgb(232 56 47 / 0.85), 3px 0 var(--cyan);
-  }
-  .page__t, .proj__artist, .aya-statement, .prod-next__t, .cg-hero__t, .cg-role__t, .cg-services__t, .cg-next__t,
-  .partners__t, .dest__name, .cg-item__t, .brand__main { transition: text-shadow 0.45s var(--ease-out); }
 }
 
 /* ---------- Animations réduites : ni grain, ni scanlines, ni glitch ---------- */

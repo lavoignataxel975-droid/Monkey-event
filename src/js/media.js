@@ -48,7 +48,9 @@ function partners(list, slots) {
   host.innerHTML = items.map((p) => {
     if (!p) return `<li class="partner partner--empty" aria-hidden="true"><span>${escape(t('partners.slot'))}</span></li>`;
     const img = `<img src="${p.logo}" alt="${escape(p.name)}" loading="lazy" decoding="async">`;
-    return `<li class="partner">${p.url
+    // --k = 1 / √ratio : hauteur inversement proportionnelle à √ratio → surface identique pour tous les logos
+    const k = p.ratio ? ` style="--k:${((p.optical ?? 1) / Math.sqrt(p.ratio)).toFixed(3)}"` : '';
+    return `<li class="partner"${k}>${p.url
       ? `<a href="${p.url}" target="_blank" rel="noopener">${img}<span class="sr-only"> ${escape(t('newtab'))}</span></a>`
       : img}</li>`;
   }).join('');
